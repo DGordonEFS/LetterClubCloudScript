@@ -1,6 +1,7 @@
 ﻿/// <reference path="./Code/Chests"/>
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
+/// <reference path="./Code/Equipment"/>
 
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);

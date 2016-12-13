@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.9</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -29,7 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="Code\BaseData.ts" />
+    <TypeScriptCompile Include="Code\Equipment.ts" />
+    <TypeScriptCompile Include="Code\PlayerInit.ts" />
     <TypeScriptCompile Include="Code\Chests.ts" />
     <TypeScriptCompile Include="Code\Constants.ts" />
     <TypeScriptCompile Include="Typings\CloudScriptTyping.d.ts" />

@@ -156,8 +156,8 @@ class ChestData
             small_letter_chest: ChestData.GetSmallChest(),
             medium_letter_chest: ChestData.GetMediumChest(),
             large_letter_chest: ChestData.GetLargeChest(),
-            new_user: ChestData.GetNewUserChest(),
-            reward: ChestData.GetRewardChest()
+            new_user_chest: ChestData.GetNewUserChest(),
+            reward_chest: ChestData.GetRewardChest()
         };
     }
 

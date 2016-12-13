@@ -110,8 +110,8 @@ var ChestData = (function () {
             small_letter_chest: ChestData.GetSmallChest(),
             medium_letter_chest: ChestData.GetMediumChest(),
             large_letter_chest: ChestData.GetLargeChest(),
-            new_user: ChestData.GetNewUserChest(),
-            reward: ChestData.GetRewardChest()
+            new_user_chest: ChestData.GetNewUserChest(),
+            reward_chest: ChestData.GetRewardChest()
         };
     };
     ChestData.PurchaseChest = function (chestId, priceCode, priceCost, awardGems, awardCoins, letterTiers, itemsToAdd, specificLetters) {
@@ -247,6 +247,11 @@ var Constants = (function () {
     Constants.Letters = "letters";
     Constants.Avatars = "avatars";
     Constants.Migration = "migration";
+    Constants.EquipmentVersion = 1;
+    Constants.Common = 0;
+    Constants.Rare = 1;
+    Constants.Epic = 2;
+    Constants.Legendary = 3;
     return Constants;
 }());
 var PlayerInit = (function () {
@@ -386,9 +391,78 @@ var PlayerInit = (function () {
     };
     return PlayerInit;
 }());
+var EquipmentData = (function () {
+    function EquipmentData() {
+    }
+    EquipmentData.GetRandomLetters = function (arenaIndex, rarity) {
+        var letterData = {};
+        var letters = [
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+            "w", "x", "y", "z"
+        ];
+        var getUniqueLetter = function () {
+            var index = Math.floor(Math.random() * letters.length);
+            var letter = letters[index];
+            letters.splice(index, 1);
+            return letter;
+        };
+        var tiersByRarity = [
+            [
+                [1],
+                [2],
+                [3],
+                [4]
+            ],
+            [
+                [1, 1],
+                [2, 1, 1],
+                [3, 2, 1],
+                [4, 3, 2]
+            ],
+            [
+                [2, 1, 1],
+                [3, 2, 1],
+                [4, 3, 2],
+                [5, 4, 3]
+            ]
+        ];
+        var tiersByArena = tiersByRarity[rarity];
+        var tier = tiersByArena[arenaIndex];
+        for (var i = 0; i < tier.length; i++) {
+            letterData[getUniqueLetter()] = tier[i];
+        }
+        return letterData;
+    };
+    EquipmentData.GetRandomRarity = function () {
+        var random = Math.random();
+        if (random > 0.95)
+            return Constants.Epic;
+        else if (random > 0.8)
+            return Constants.Rare;
+        else
+            return Constants.Common;
+    };
+    EquipmentData.GetRandomHeadGear = function () {
+        var arenaIndex = 1;
+        var rarity = EquipmentData.GetRandomRarity();
+        var equipment = {
+            Id: "",
+            Rarity: rarity,
+            Image: EquipmentData.GetRandomHeadgearImage(),
+            LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
+            Version: Constants.EquipmentVersion
+        };
+        return equipment;
+    };
+    EquipmentData.GetRandomHeadgearImage = function () {
+        return "";
+    };
+    return EquipmentData;
+}());
 /// <reference path="./Code/Chests"/>
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
+/// <reference path="./Code/Equipment"/>
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
 };

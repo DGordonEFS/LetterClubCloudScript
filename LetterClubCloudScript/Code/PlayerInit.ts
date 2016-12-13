@@ -54,7 +54,7 @@ class PlayerInit {
             wizard: { IsPurchased: false, Index: 17 }
         };
     }
-
+    
     public static InitPlayer(args) {
         log.debug("initPlayer");
         var result = { Letters: null, Avatars: null, Migration: false, Coins: -1, Gems: -1 };
