@@ -1,0 +1,6 @@
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\bin\LetterClubCloudScript.dll.config
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\bin\LetterClubCloudScript.dll
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\bin\LetterClubCloudScript.pdb
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\obj\Debug\LetterClubCloudScript.csprojResolveAssemblyReference.cache
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\obj\Debug\LetterClubCloudScript.dll
+C:\Users\Dale Gordon\Documents\GitHub\LetterClub\LetterClubCloudScript\LetterClubCloudScript\obj\Debug\LetterClubCloudScript.pdb
