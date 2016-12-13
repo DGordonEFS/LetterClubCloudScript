@@ -1,6 +1,6 @@
 ﻿
 class Constants {
-    static get Letters(): string { return "letters" }
-    static get Avatars(): string { return "avatars" }
-    static get Migration(): string { return "migration" }
+    static readonly Letters: string = "letters";
+    static readonly Avatars: string = "avatars";
+    static readonly Migration: string = "migration";
 }

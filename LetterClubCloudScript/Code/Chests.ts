@@ -1,11 +1,10 @@
 ﻿
-var getRandomIntBetween = function (min, max) {
-    return min + Math.round((max - min) * Math.random());
-}
 
-var chestData =
+class ChestData
+{
+    public static GetSmallChest()
     {
-        small_letter_chest: {
+        return {
             Type: "letter_chest",
             ChestId: "brown",
             Index: 0,
@@ -18,20 +17,23 @@ var chestData =
             GemsMin: 0,
             GemsMax: 0,
             LetterTiers: [9, 1, 0, 0],
+            SpecificLetters: [],
+            Items: [],
             OnPurchase: function (data) {
-                log.debug("small_letter_chest.onPurchase()");
-                return purchaseChest(data.ChestId,
+                return ChestData.PurchaseChest(data.ChestId,
                     data.PriceCode,
                     data.PriceCost,
                     getRandomIntBetween(data.GemsMin, data.GemsMax),
                     getRandomIntBetween(data.CoinsMin, data.CoinsMax),
                     data.LetterTiers,
-                    [],
-                    []);
+                    data.Items,
+                    data.SpecificLetters);
             }
-        },
+        };
+    }
 
-        medium_letter_chest: {
+    public static GetMediumChest() {
+        return {
             Type: "letter_chest",
             ChestId: "red",
             Index: 1,
@@ -44,19 +46,23 @@ var chestData =
             GemsMin: 0,
             GemsMax: 0,
             LetterTiers: [9, 5, 9, 0],
+            SpecificLetters: [],
+            Items: [],
             OnPurchase: function (data) {
-                return purchaseChest(data.ChestId,
+                return ChestData.PurchaseChest(data.ChestId,
                     data.PriceCode,
                     data.PriceCost,
                     getRandomIntBetween(data.GemsMin, data.GemsMax),
                     getRandomIntBetween(data.CoinsMin, data.CoinsMax),
                     data.LetterTiers,
-                    [],
-                    []);
+                    data.Items,
+                    data.SpecificLetters);
             }
-        },
+        };
+    }
 
-        large_letter_chest: {
+    public static GetLargeChest() {
+        return {
             Type: "letter_chest",
             ChestId: "gold",
             Index: 2,
@@ -69,21 +75,101 @@ var chestData =
             GemsMin: 0,
             GemsMax: 0,
             LetterTiers: [0, 16, 12, 2],
+            SpecificLetters: [],
+            Items: [],
             OnPurchase: function (data) {
-                return purchaseChest(data.ChestId,
+                return ChestData.PurchaseChest(data.ChestId,
                     data.PriceCode,
                     data.PriceCost,
                     getRandomIntBetween(data.GemsMin, data.GemsMax),
                     getRandomIntBetween(data.CoinsMin, data.CoinsMax),
                     data.LetterTiers,
-                    [],
-                    []);
+                    data.SpecificLetters,
+                    data.Items);
             }
-        }
-    };
+        };
+    }
+
+    public static GetNewUserChest() {
+        return {
+            Type: "letter_chest",
+            ChestId: "purple",
+            PriceCode: null,
+            PriceCost: 0,
+            CoinsMin: 100,
+            CoinsMax: 100,
+            GemsMin: 10,
+            GemsMax: 10,
+            LetterTiers: [0, 0, 0, 0],
+            SpecificLetters: [{ Letter: "g", Amount: 3 }, { Letter: "i", Amount: 3 }, { Letter: "a", Amount: 5 }],
+            Items: [],
+            OnPurchase: function (data) {
+                return ChestData.PurchaseChest(data.ChestId,
+                    data.PriceCode,
+                    data.PriceCost,
+                    getRandomIntBetween(data.GemsMin, data.GemsMax),
+                    getRandomIntBetween(data.CoinsMin, data.CoinsMax),
+                    data.LetterTiers,
+                    data.Items,
+                    data.SpecificLetters);
+            }
+        };
+    }
+
+    public static GetRewardChest() {
+
+        var userDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: ["profile"]
+        });
+
+        var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
+
+        return {
+            Type: "letter_chest",
+            ChestId: "purple",
+            PriceCode: null,
+            PriceCost: 0,
+            CoinsMin: (userProfile.ArenaIndex + 1) * 50,
+            CoinsMax: (userProfile.ArenaIndex + 1) * 50,
+            GemsMin: 1,
+            GemsMax: 3,
+            LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
+            SpecificLetters: [],
+            Items: [],
+            OnPurchase: function (data) {
+                return ChestData.PurchaseChest(data.ChestId,
+                    data.PriceCode,
+                    data.PriceCost,
+                    getRandomIntBetween(data.GemsMin, data.GemsMax),
+                    getRandomIntBetween(data.CoinsMin, data.CoinsMax),
+                    data.LetterTiers,
+                    data.Items,
+                    data.SpecificLetters);
+            }
+        };
+    }
 
 
-var purchaseChest = function (chestId, priceCode, priceCost, awardGems, awardCoins, letterTiers, itemsToAdd, specificLetters) {
+    public static GetPurchaseChests() {
+        return {
+            small_letter_chest: ChestData.GetSmallChest(),
+            medium_letter_chest: ChestData.GetMediumChest(),
+            large_letter_chest: ChestData.GetLargeChest()
+        };
+    }
+
+    public static GetAllChests() {
+        return {
+            small_letter_chest: ChestData.GetSmallChest(),
+            medium_letter_chest: ChestData.GetMediumChest(),
+            large_letter_chest: ChestData.GetLargeChest(),
+            new_user: ChestData.GetNewUserChest(),
+            reward: ChestData.GetRewardChest()
+        };
+    }
+
+    private static PurchaseChest = function (chestId, priceCode, priceCost, awardGems, awardCoins, letterTiers, itemsToAdd, specificLetters) {
     log.debug("purchaseChest()");
     var chestResult = {
         Success: false,
@@ -226,5 +312,12 @@ var purchaseChest = function (chestId, priceCode, priceCost, awardGems, awardCoi
     chestResult.Success = true;
     return chestResult;
 }
+}
+
+var getRandomIntBetween = function (min, max) {
+    return min + Math.round((max - min) * Math.random());
+}
+
+
 
 
