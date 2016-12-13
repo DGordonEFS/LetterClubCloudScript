@@ -15,11 +15,12 @@ handlers.purchaseRandomAvatar = function (args, context): PurchaseRandomAvatarRe
 }
 
 handlers.getChestData = function (args, context) {
-    return ChestData.GetPurchaseChests();
+    return ChestData.GetChests();
 }
 
 handlers.purchaseChest = function (args, context) {
-    return ChestData.GetAllChests()[args.Id].OnPurchase(ChestData.GetAllChests()[args.Id]);
+    var chest = ChestData.GetChests()[args.Id];
+    return chest.OnPurchase(chest);
 }
 
 handlers.purchaseDailyLetter = function (args, context) {

@@ -66,7 +66,7 @@ var ChestData = (function () {
     };
     ChestData.GetNewUserChest = function () {
         return {
-            Type: "letter_chest",
+            Type: "new_user_chest",
             ChestId: "purple",
             PriceCode: null,
             PriceCost: 0,
@@ -89,7 +89,7 @@ var ChestData = (function () {
         });
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
         return {
-            Type: "letter_chest",
+            Type: "reward_chest",
             ChestId: "purple",
             PriceCode: null,
             PriceCost: 0,
@@ -105,14 +105,7 @@ var ChestData = (function () {
             }
         };
     };
-    ChestData.GetPurchaseChests = function () {
-        return {
-            small_letter_chest: ChestData.GetSmallChest(),
-            medium_letter_chest: ChestData.GetMediumChest(),
-            large_letter_chest: ChestData.GetLargeChest()
-        };
-    };
-    ChestData.GetAllChests = function () {
+    ChestData.GetChests = function () {
         return {
             small_letter_chest: ChestData.GetSmallChest(),
             medium_letter_chest: ChestData.GetMediumChest(),
@@ -406,10 +399,11 @@ handlers.purchaseRandomAvatar = function (args, context) {
     return purchaseRandomAvatar(args);
 };
 handlers.getChestData = function (args, context) {
-    return ChestData.GetPurchaseChests();
+    return ChestData.GetChests();
 };
 handlers.purchaseChest = function (args, context) {
-    return ChestData.GetAllChests()[args.Id].OnPurchase(ChestData.GetAllChests()[args.Id]);
+    var chest = ChestData.GetChests()[args.Id];
+    return chest.OnPurchase(chest);
 };
 handlers.purchaseDailyLetter = function (args, context) {
     purchaseDailyLetter(args);

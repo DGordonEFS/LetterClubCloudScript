@@ -92,7 +92,7 @@ class ChestData
 
     public static GetNewUserChest() {
         return {
-            Type: "letter_chest",
+            Type: "new_user_chest",
             ChestId: "purple",
             PriceCode: null,
             PriceCost: 0,
@@ -126,7 +126,7 @@ class ChestData
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
 
         return {
-            Type: "letter_chest",
+            Type: "reward_chest",
             ChestId: "purple",
             PriceCode: null,
             PriceCost: 0,
@@ -150,16 +150,8 @@ class ChestData
         };
     }
 
-
-    public static GetPurchaseChests() {
-        return {
-            small_letter_chest: ChestData.GetSmallChest(),
-            medium_letter_chest: ChestData.GetMediumChest(),
-            large_letter_chest: ChestData.GetLargeChest()
-        };
-    }
-
-    public static GetAllChests() {
+    
+    public static GetChests() {
         return {
             small_letter_chest: ChestData.GetSmallChest(),
             medium_letter_chest: ChestData.GetMediumChest(),
