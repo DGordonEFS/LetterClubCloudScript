@@ -221,11 +221,12 @@ class ChestData
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment, Constants.UniqueEquipment]
         });
         log.debug("set letters total");
         log.debug(internalDataResult.Data[Constants.Letters].Value);
         chestResult.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
+        chestResult.Inventory = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
 
         log.debug("letters tier 0");
         // add the new letter values to the existing
@@ -279,13 +280,20 @@ class ChestData
             chestResult.Letters[letter].Amount += amount;
         }
 
-        log.debug("euipment");
+        log.debug("equipment");
+
+        var uniqueEquipmentId = 0;
+        if (internalDataResult.Data[Constants.UniqueEquipment] != null)
+            uniqueEquipmentId = JSON.parse(internalDataResult.Data[Constants.UniqueEquipment].Value);
+        log.debug("uniqueEquipment: " + uniqueEquipmentId);
+        if (uniqueEquipmentId == null)
+            uniqueEquipmentId = 0;
+
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
-            var rarityIndex = randomHeadGearsRarityWeights[Math.floor(Math.random() * randomItemRarityWeightTotal)];
+            var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
             var rarity;
 
-            log.debug("rarity: " + rarity);
 
             if (rarityIndex < randomHeadGearsRarityWeights[0])
                 rarity = Constants.Common;
@@ -296,17 +304,25 @@ class ChestData
             else
                 rarity = Constants.Legendary;
 
+
+            log.debug("rarity: " + rarity);
+
             var equipment = EquipmentData.GetRandomHeadGear(rarity);
+
+            equipment.Id = "headgear_" + uniqueEquipmentId++;
 
             log.debug("instance: " + equipment);
 
             chestResult.ItemsAdded.push(equipment);
+            chestResult.Inventory.push(equipment);
         }
 
         log.debug("send internal data");
         // send the modified values back to the player's internal data
         var returnData: { [keys: string]: string } = {};
         returnData[Constants.Letters] = JSON.stringify(chestResult.Letters);
+        returnData[Constants.Equipment] = JSON.stringify(chestResult.Inventory);
+        returnData[Constants.UniqueEquipment] = JSON.stringify(uniqueEquipmentId);
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
             Data: returnData

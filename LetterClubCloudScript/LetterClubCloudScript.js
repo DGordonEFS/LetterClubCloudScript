@@ -181,11 +181,12 @@ var ChestData = (function () {
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment, Constants.UniqueEquipment]
         });
         log.debug("set letters total");
         log.debug(internalDataResult.Data[Constants.Letters].Value);
         chestResult.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
+        chestResult.Inventory = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
         log.debug("letters tier 0");
         // add the new letter values to the existing
         var letters = [
@@ -227,12 +228,17 @@ var ChestData = (function () {
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
-        log.debug("euipment");
+        log.debug("equipment");
+        var uniqueEquipmentId = 0;
+        if (internalDataResult.Data[Constants.UniqueEquipment] != null)
+            uniqueEquipmentId = JSON.parse(internalDataResult.Data[Constants.UniqueEquipment].Value);
+        log.debug("uniqueEquipment: " + uniqueEquipmentId);
+        if (uniqueEquipmentId == null)
+            uniqueEquipmentId = 0;
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
-            var rarityIndex = randomHeadGearsRarityWeights[Math.floor(Math.random() * randomItemRarityWeightTotal)];
+            var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
             var rarity;
-            log.debug("rarity: " + rarity);
             if (rarityIndex < randomHeadGearsRarityWeights[0])
                 rarity = Constants.Common;
             else if (rarityIndex < randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1])
@@ -241,14 +247,19 @@ var ChestData = (function () {
                 rarity = Constants.Epic;
             else
                 rarity = Constants.Legendary;
+            log.debug("rarity: " + rarity);
             var equipment = EquipmentData.GetRandomHeadGear(rarity);
+            equipment.Id = "headgear_" + uniqueEquipmentId++;
             log.debug("instance: " + equipment);
             chestResult.ItemsAdded.push(equipment);
+            chestResult.Inventory.push(equipment);
         }
         log.debug("send internal data");
         // send the modified values back to the player's internal data
         var returnData = {};
         returnData[Constants.Letters] = JSON.stringify(chestResult.Letters);
+        returnData[Constants.Equipment] = JSON.stringify(chestResult.Inventory);
+        returnData[Constants.UniqueEquipment] = JSON.stringify(uniqueEquipmentId);
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
             Data: returnData
@@ -278,6 +289,8 @@ var Constants = (function () {
     }
     Constants.Letters = "letters";
     Constants.Avatars = "avatars";
+    Constants.Equipment = "equipment";
+    Constants.UniqueEquipment = "unique_equipment";
     Constants.Migration = "migration";
     Constants.EquipmentVersion = 1;
     Constants.Common = 0;
@@ -342,14 +355,17 @@ var PlayerInit = (function () {
             wizard: { IsPurchased: false, Index: 17 }
         };
     };
+    PlayerInit.GetBaseEquipment = function () {
+        return [];
+    };
     PlayerInit.InitPlayer = function (args) {
         log.debug("initPlayer");
-        var result = { Letters: null, Avatars: null, Migration: false, Coins: -1, Gems: -1 };
+        var result = { Letters: null, Avatars: null, Inventory: null, Migration: false, Coins: -1, Gems: -1 };
         log.debug("getinternaldata");
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
         });
         if (internalDataResult.Data[Constants.Letters] != null) {
             result.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
@@ -372,7 +388,12 @@ var PlayerInit = (function () {
             }
         }
         result.Avatars = baseAvatars;
-        log.debug("avatars " + result.Avatars);
+        var baseEquipment = PlayerInit.GetBaseEquipment();
+        if (internalDataResult.Data[Constants.Equipment] != null) {
+            log.debug("has equipment already");
+            baseEquipment = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
+        }
+        result.Inventory = baseEquipment;
         if (args.IsMigrating) {
             log.debug("migration");
             // add gems
@@ -410,6 +431,7 @@ var PlayerInit = (function () {
         var data = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
+        data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
         log.debug("sending avatars: " + data[Constants.Avatars]);
         // send the modified values back to the player's internal data
@@ -419,6 +441,7 @@ var PlayerInit = (function () {
         });
         log.debug(result.Letters);
         log.debug(result.Avatars);
+        log.debug(result.Inventory);
         log.debug("complete");
         return result;
     };
@@ -428,6 +451,7 @@ var EquipmentData = (function () {
     function EquipmentData() {
     }
     EquipmentData.GetRandomLetters = function (arenaIndex, rarity) {
+        log.debug("getrandomletters");
         var letterData = {};
         var letters = [
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
@@ -439,14 +463,25 @@ var EquipmentData = (function () {
             letters.splice(index, 1);
             return letter;
         };
+        var arena = "Arena" + arenaIndex;
+        log.debug(arena + ", " + rarity);
         var tier = EquipmentData.LetterDataByArenaAndRarity["Arena" + arenaIndex][rarity];
+        log.debug("tier: " + tier);
         for (var i = 0; i < tier.length; i++) {
             letterData[getUniqueLetter()] = tier[i];
         }
+        log.debug("created letters");
         return letterData;
     };
     EquipmentData.GetRandomHeadGear = function (rarity) {
-        var arenaIndex = 1;
+        log.debug("get random headgear");
+        var userDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: ["profile"]
+        });
+        var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
+        var arenaIndex = userProfile.ArenaIndex;
+        log.debug("arenaindex");
         var equipment = {
             Id: "",
             Type: Constants.HeadGear,
@@ -455,10 +490,12 @@ var EquipmentData = (function () {
             LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
             Version: Constants.EquipmentVersion
         };
+        log.debug("equipment: " + equipment);
         return equipment;
     };
     EquipmentData.GetRandomHeadgearImage = function (rarity, catagories) {
         var pool = [];
+        log.debug("getrandomheadgearimage");
         for (var i = 0; i < catagories.length; i++) {
             var catagory = EquipmentData.HeadgearImages[catagories[i]];
             var poolToAdd = catagory[["Common", "Rare", "Epic", "Legendary"][rarity]];
@@ -493,34 +530,34 @@ var EquipmentData = (function () {
     };
     EquipmentData.HeadgearImages = {
         Arena0: {
-            Common: ["glasses_common_arena_0"],
+            Common: ["glasses_common_arena_0_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena1: {
-            Common: ["glasses_common_arena_1"],
+            Common: ["glasses_common_arena_1_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena2: {
-            Common: ["glasses_common_arena_1"],
+            Common: ["glasses_common_arena_1_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena3: {
-            Common: ["glasses_common_arena_2"],
+            Common: ["glasses_common_arena_2_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Shared: {
             Common: [],
-            Rare: ["glasses_rare_shared_0"],
-            Epic: ["glasses_epic_shared_0"],
-            Legendary: ["glasses_legendary_shared_0"]
+            Rare: ["glasses_rare_shared_0_a"],
+            Epic: ["glasses_epic_shared_0_a"],
+            Legendary: []
         }
     };
     return EquipmentData;

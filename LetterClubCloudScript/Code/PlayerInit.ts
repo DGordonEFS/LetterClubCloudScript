@@ -54,16 +54,20 @@ class PlayerInit {
             wizard: { IsPurchased: false, Index: 17 }
         };
     }
+
+    public static GetBaseEquipment() {
+        return [];
+    }
     
     public static InitPlayer(args) {
         log.debug("initPlayer");
-        var result = { Letters: null, Avatars: null, Migration: false, Coins: -1, Gems: -1 };
+        var result = { Letters: null, Avatars: null, Inventory:null, Migration: false, Coins: -1, Gems: -1 };
 
         log.debug("getinternaldata");
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
         });
 
         if (internalDataResult.Data[Constants.Letters] != null) {
@@ -73,7 +77,7 @@ class PlayerInit {
             result.Letters = PlayerInit.GetBaseLetters();
             log.debug("new letters " + result.Letters);
         }
-
+        
         var baseAvatars = PlayerInit.GetBaseAvatars();
 
         log.debug("avatar key: " + Constants.Avatars);
@@ -89,9 +93,16 @@ class PlayerInit {
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
-
         result.Avatars = baseAvatars;
-        log.debug("avatars " + result.Avatars);
+
+        var baseEquipment = PlayerInit.GetBaseEquipment();
+        
+        if (internalDataResult.Data[Constants.Equipment] != null) {
+            log.debug("has equipment already");
+            baseEquipment = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
+            
+        }
+        result.Inventory = baseEquipment;
 
         if (args.IsMigrating) {
             log.debug("migration");
@@ -137,6 +148,7 @@ class PlayerInit {
         var data: { [keys: string]: string } = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
+        data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
 
         log.debug("sending avatars: " + data[Constants.Avatars]);
@@ -149,6 +161,7 @@ class PlayerInit {
 
         log.debug(result.Letters);
         log.debug(result.Avatars);
+        log.debug(result.Inventory);
         log.debug("complete");
 
         return result;

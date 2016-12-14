@@ -25,40 +25,40 @@ class EquipmentData {
 
     public static readonly HeadgearImages: HeadgearImageData = {
         Arena0: {
-            Common: ["glasses_common_arena_0"],
+            Common: ["glasses_common_arena_0_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena1: {
-            Common: ["glasses_common_arena_1"],
+            Common: ["glasses_common_arena_1_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena2: {
-            Common: ["glasses_common_arena_1"],
+            Common: ["glasses_common_arena_1_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena3: {
-            Common: ["glasses_common_arena_2"],
+            Common: ["glasses_common_arena_2_a"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Shared: {
             Common: [],
-            Rare: ["glasses_rare_shared_0"],
-            Epic: ["glasses_epic_shared_0"],
-            Legendary: ["glasses_legendary_shared_0"]
+            Rare: ["glasses_rare_shared_0_a"],
+            Epic: ["glasses_epic_shared_0_a"],
+            Legendary: []
         }
     };
 
     
     private static GetRandomLetters(arenaIndex:number, rarity:number) : EquipmentLetterData {
-
+        log.debug("getrandomletters");
         var letterData: EquipmentLetterData = {};
 
         var letters = [
@@ -72,18 +72,34 @@ class EquipmentData {
             letters.splice(index, 1);
             return letter;
         };
-        
+
+        var arena = "Arena" + arenaIndex;
+        log.debug(arena + ", " + rarity);
+
         var tier = EquipmentData.LetterDataByArenaAndRarity["Arena" + arenaIndex][rarity];
+        log.debug("tier: " + tier);
         for (var i = 0; i < tier.length; i++) {
             letterData[getUniqueLetter()] = tier[i];
         }
+
+        log.debug("created letters");
         
         return letterData;
     }
     
-    public static GetRandomHeadGear(rarity:number): Equipment {
-        var arenaIndex: number = 1;
-        
+    public static GetRandomHeadGear(rarity: number): Equipment {
+        log.debug("get random headgear");
+        var userDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: ["profile"]
+        });
+
+        var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
+
+        var arenaIndex: number = userProfile.ArenaIndex;
+
+        log.debug("arenaindex");
+
         var equipment: Equipment = {
             Id: "",
             Type: Constants.HeadGear,
@@ -93,11 +109,13 @@ class EquipmentData {
             Version: Constants.EquipmentVersion
         };
 
+        log.debug("equipment: " + equipment);
         return equipment;
     }
 
     private static GetRandomHeadgearImage(rarity:number, catagories: string[]): string {
         var pool = [];
+        log.debug("getrandomheadgearimage");
 
         for (var i = 0; i < catagories.length; i++) {
             var catagory = EquipmentData.HeadgearImages[catagories[i]];
