@@ -8,4 +8,5 @@ class Constants {
     static readonly Rare: number = 1;
     static readonly Epic: number = 2;
     static readonly Legendary: number = 3;
+    static readonly HeadGear: number = 0;
 }

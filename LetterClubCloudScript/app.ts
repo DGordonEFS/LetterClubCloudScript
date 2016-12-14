@@ -2,6 +2,7 @@
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
+/// <reference path="./Code/Spells"/>
 
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
@@ -19,9 +20,8 @@ handlers.getChestData = function (args, context) {
     return ChestData.GetChests();
 }
 
-handlers.purchaseChest = function (args, context) {
-    var chest = ChestData.GetChests()[args.Id];
-    return chest.OnPurchase(chest);
+handlers.purchaseChest = function (args, context): ChestResult {
+    return ChestData.PurchaseChest(ChestData.GetChests()[args.Id]);
 }
 
 handlers.purchaseDailyLetter = function (args, context) {

@@ -16,10 +16,9 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
-            Items: [],
-            OnPurchase: function (data) {
-                return ChestData.PurchaseChest(data.ChestId, data.PriceCode, data.PriceCost, getRandomIntBetween(data.GemsMin, data.GemsMax), getRandomIntBetween(data.CoinsMin, data.CoinsMax), data.LetterTiers, data.Items, data.SpecificLetters);
-            }
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [1000, 100, 10, 0],
+            SpecificItems: []
         };
     };
     ChestData.GetMediumChest = function () {
@@ -37,10 +36,9 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [9, 5, 9, 0],
             SpecificLetters: [],
-            Items: [],
-            OnPurchase: function (data) {
-                return ChestData.PurchaseChest(data.ChestId, data.PriceCode, data.PriceCost, getRandomIntBetween(data.GemsMin, data.GemsMax), getRandomIntBetween(data.CoinsMin, data.CoinsMax), data.LetterTiers, data.Items, data.SpecificLetters);
-            }
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 100, 1, 0],
+            SpecificItems: []
         };
     };
     ChestData.GetLargeChest = function () {
@@ -58,28 +56,29 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
-            Items: [],
-            OnPurchase: function (data) {
-                return ChestData.PurchaseChest(data.ChestId, data.PriceCode, data.PriceCost, getRandomIntBetween(data.GemsMin, data.GemsMax), getRandomIntBetween(data.CoinsMin, data.CoinsMax), data.LetterTiers, data.SpecificLetters, data.Items);
-            }
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 10, 1, 0],
+            SpecificItems: []
         };
     };
     ChestData.GetNewUserChest = function () {
         return {
             Type: "new_user_chest",
             ChestId: "purple",
+            Index: -1,
             PriceCode: null,
             PriceCost: 0,
+            IsSale: false,
+            SalePrice: -1,
             CoinsMin: 100,
             CoinsMax: 100,
             GemsMin: 10,
             GemsMax: 10,
             LetterTiers: [0, 0, 0, 0],
             SpecificLetters: [{ Letter: "g", Amount: 3 }, { Letter: "i", Amount: 3 }, { Letter: "a", Amount: 5 }],
-            Items: [],
-            OnPurchase: function (data) {
-                return ChestData.PurchaseChest(data.ChestId, data.PriceCode, data.PriceCost, getRandomIntBetween(data.GemsMin, data.GemsMax), getRandomIntBetween(data.CoinsMin, data.CoinsMax), data.LetterTiers, data.Items, data.SpecificLetters);
-            }
+            RandomHeadGears: 0,
+            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            SpecificItems: []
         };
     };
     ChestData.GetRewardChest = function () {
@@ -91,18 +90,20 @@ var ChestData = (function () {
         return {
             Type: "reward_chest",
             ChestId: "purple",
+            Index: -1,
             PriceCode: null,
             PriceCost: 0,
+            IsSale: false,
+            SalePrice: -1,
             CoinsMin: (userProfile.ArenaIndex + 1) * 50,
             CoinsMax: (userProfile.ArenaIndex + 1) * 50,
             GemsMin: 1,
             GemsMax: 3,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
-            Items: [],
-            OnPurchase: function (data) {
-                return ChestData.PurchaseChest(data.ChestId, data.PriceCode, data.PriceCost, getRandomIntBetween(data.GemsMin, data.GemsMax), getRandomIntBetween(data.CoinsMin, data.CoinsMax), data.LetterTiers, data.Items, data.SpecificLetters);
-            }
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [1000, 10, 0, 0],
+            SpecificItems: []
         };
     };
     ChestData.GetChests = function () {
@@ -114,7 +115,18 @@ var ChestData = (function () {
             reward_chest: ChestData.GetRewardChest()
         };
     };
-    ChestData.PurchaseChest = function (chestId, priceCode, priceCost, awardGems, awardCoins, letterTiers, itemsToAdd, specificLetters) {
+    ChestData.PurchaseChest = function (data) {
+        var chestId = data.ChestId;
+        var priceCode = data.PriceCode;
+        var priceCost = data.PriceCost;
+        var awardGems = getRandomIntBetween(data.GemsMin, data.GemsMax);
+        var awardCoins = getRandomIntBetween(data.CoinsMin, data.CoinsMax);
+        var letterTiers = data.LetterTiers;
+        var specificLetters = data.SpecificLetters;
+        var randomHeadGears = data.RandomHeadGears;
+        var randomHeadGearsRarityWeights = data.RandomHeadGearsRarityWeights;
+        var specificItems = data.SpecificItems;
+        var randomItemRarityWeightTotal = randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1] + randomHeadGearsRarityWeights[2] + randomHeadGearsRarityWeights[3];
         log.debug("purchaseChest()");
         var chestResult = {
             Success: false,
@@ -215,23 +227,43 @@ var ChestData = (function () {
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
+        log.debug("euipment");
+        for (var i = 0; i < randomHeadGears; i++) {
+            log.debug("   - create random headgear");
+            var rarityIndex = randomHeadGearsRarityWeights[Math.floor(Math.random() * randomItemRarityWeightTotal)];
+            var rarity;
+            log.debug("rarity: " + rarity);
+            if (rarityIndex < randomHeadGearsRarityWeights[0])
+                rarity = Constants.Common;
+            else if (rarityIndex < randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1])
+                rarity = Constants.Rare;
+            else if (rarityIndex < randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1] + randomHeadGearsRarityWeights[2])
+                rarity = Constants.Epic;
+            else
+                rarity = Constants.Legendary;
+            var equipment = EquipmentData.GetRandomHeadGear(rarity);
+            log.debug("instance: " + equipment);
+            chestResult.ItemsAdded.push(equipment);
+        }
         log.debug("send internal data");
         // send the modified values back to the player's internal data
-        var data = {};
-        data[Constants.Letters] = JSON.stringify(chestResult.Letters);
+        var returnData = {};
+        returnData[Constants.Letters] = JSON.stringify(chestResult.Letters);
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
-            Data: data
+            Data: returnData
         });
-        if (itemsToAdd.length > 0) {
-            //	log.debug("add items");
-            var grantItemsResult = server.GrantItemsToUser({
-                PlayFabId: currentPlayerId,
-                ItemIds: itemsToAdd
-            });
-            // reupdate the inventory
-            inventoryResult = server.GetUserInventory({ PlayFabId: currentPlayerId });
-        }
+        /*
+    if (itemsToAdd.length > 0) {
+        //	log.debug("add items");
+        var grantItemsResult = server.GrantItemsToUser({
+            PlayFabId: currentPlayerId,
+            ItemIds: itemsToAdd
+        });
+
+        // reupdate the inventory
+        inventoryResult = server.GetUserInventory({ PlayFabId: currentPlayerId });
+    }*/
         log.debug("complete");
         chestResult.Success = true;
         return chestResult;
@@ -252,6 +284,7 @@ var Constants = (function () {
     Constants.Rare = 1;
     Constants.Epic = 2;
     Constants.Legendary = 3;
+    Constants.HeadGear = 0;
     return Constants;
 }());
 var PlayerInit = (function () {
@@ -406,63 +439,102 @@ var EquipmentData = (function () {
             letters.splice(index, 1);
             return letter;
         };
-        var tiersByRarity = [
-            [
-                [1],
-                [2],
-                [3],
-                [4]
-            ],
-            [
-                [1, 1],
-                [2, 1, 1],
-                [3, 2, 1],
-                [4, 3, 2]
-            ],
-            [
-                [2, 1, 1],
-                [3, 2, 1],
-                [4, 3, 2],
-                [5, 4, 3]
-            ]
-        ];
-        var tiersByArena = tiersByRarity[rarity];
-        var tier = tiersByArena[arenaIndex];
+        var tier = EquipmentData.LetterDataByArenaAndRarity["Arena" + arenaIndex][rarity];
         for (var i = 0; i < tier.length; i++) {
             letterData[getUniqueLetter()] = tier[i];
         }
         return letterData;
     };
-    EquipmentData.GetRandomRarity = function () {
-        var random = Math.random();
-        if (random > 0.95)
-            return Constants.Epic;
-        else if (random > 0.8)
-            return Constants.Rare;
-        else
-            return Constants.Common;
-    };
-    EquipmentData.GetRandomHeadGear = function () {
+    EquipmentData.GetRandomHeadGear = function (rarity) {
         var arenaIndex = 1;
-        var rarity = EquipmentData.GetRandomRarity();
         var equipment = {
             Id: "",
+            Type: Constants.HeadGear,
             Rarity: rarity,
-            Image: EquipmentData.GetRandomHeadgearImage(),
+            Image: EquipmentData.GetRandomHeadgearImage(rarity, ["Arena" + arenaIndex, "Shared"]),
             LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
             Version: Constants.EquipmentVersion
         };
         return equipment;
     };
-    EquipmentData.GetRandomHeadgearImage = function () {
-        return "";
+    EquipmentData.GetRandomHeadgearImage = function (rarity, catagories) {
+        var pool = [];
+        for (var i = 0; i < catagories.length; i++) {
+            var catagory = EquipmentData.HeadgearImages[catagories[i]];
+            var poolToAdd = catagory[["Common", "Rare", "Epic", "Legendary"][rarity]];
+            for (var j = 0; j < poolToAdd.length; j++) {
+                pool[pool.length] = poolToAdd[j];
+            }
+        }
+        var index = Math.floor(Math.random() * pool.length);
+        return pool[index];
+    };
+    EquipmentData.LetterDataByArenaAndRarity = {
+        Arena0: [
+            [1],
+            [1, 1],
+            [2, 1, 1]
+        ],
+        Arena1: [
+            [2],
+            [2, 1, 1],
+            [3, 2, 1]
+        ],
+        Arena2: [
+            [3],
+            [3, 2, 1],
+            [4, 3, 2]
+        ],
+        Arena3: [
+            [4],
+            [4, 3, 2],
+            [5, 4, 3]
+        ]
+    };
+    EquipmentData.HeadgearImages = {
+        Arena0: {
+            Common: ["glasses_common_arena_0"],
+            Rare: [],
+            Epic: [],
+            Legendary: []
+        },
+        Arena1: {
+            Common: ["glasses_common_arena_1"],
+            Rare: [],
+            Epic: [],
+            Legendary: []
+        },
+        Arena2: {
+            Common: ["glasses_common_arena_1"],
+            Rare: [],
+            Epic: [],
+            Legendary: []
+        },
+        Arena3: {
+            Common: ["glasses_common_arena_2"],
+            Rare: [],
+            Epic: [],
+            Legendary: []
+        },
+        Shared: {
+            Common: [],
+            Rare: ["glasses_rare_shared_0"],
+            Epic: ["glasses_epic_shared_0"],
+            Legendary: ["glasses_legendary_shared_0"]
+        }
     };
     return EquipmentData;
+}());
+var SpellData = (function () {
+    function SpellData() {
+    }
+    return SpellData;
 }());
 /// <reference path="./Code/Chests"/>
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
+/// <reference path="./Code/Spells"/>
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
 };
@@ -476,8 +548,7 @@ handlers.getChestData = function (args, context) {
     return ChestData.GetChests();
 };
 handlers.purchaseChest = function (args, context) {
-    var chest = ChestData.GetChests()[args.Id];
-    return chest.OnPurchase(chest);
+    return ChestData.PurchaseChest(ChestData.GetChests()[args.Id]);
 };
 handlers.purchaseDailyLetter = function (args, context) {
     purchaseDailyLetter(args);
