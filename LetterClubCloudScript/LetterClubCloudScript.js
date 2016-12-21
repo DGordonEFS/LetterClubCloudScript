@@ -16,7 +16,7 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [1000, 100, 10, 0],
             SpecificItems: []
         };
@@ -36,7 +36,7 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [9, 5, 9, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 100, 1, 0],
             SpecificItems: []
         };
@@ -56,7 +56,7 @@ var ChestData = (function () {
             GemsMax: 0,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 10, 1, 0],
             SpecificItems: []
         };
@@ -101,7 +101,7 @@ var ChestData = (function () {
             GemsMax: 3,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [1000, 10, 0, 0],
             SpecificItems: []
         };
@@ -297,7 +297,7 @@ var Constants = (function () {
     Constants.Rare = 1;
     Constants.Epic = 2;
     Constants.Legendary = 3;
-    Constants.HeadGear = 0;
+    Constants.Sunglasses = 0;
     return Constants;
 }());
 var PlayerInit = (function () {
@@ -484,8 +484,9 @@ var EquipmentData = (function () {
         log.debug("arenaindex");
         var equipment = {
             Id: "",
-            Type: Constants.HeadGear,
+            Type: Constants.Sunglasses,
             Rarity: rarity,
+            Level: arenaIndex,
             Image: EquipmentData.GetRandomHeadgearImage(rarity, ["Arena" + arenaIndex, "Shared"]),
             LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
             Version: Constants.EquipmentVersion
@@ -530,42 +531,47 @@ var EquipmentData = (function () {
     };
     EquipmentData.HeadgearImages = {
         Arena0: {
-            Common: ["glasses_common_arena_0_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena1: {
-            Common: ["glasses_common_arena_1_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena2: {
-            Common: ["glasses_common_arena_1_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
+                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena3: {
-            Common: ["glasses_common_arena_2_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
+                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e",
+                "glasses_common_arena_3_a", "glasses_common_arena_3_b", "glasses_common_arena_3_c", "glasses_common_arena_3_d", "glasses_common_arena_3_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Shared: {
-            Common: [],
-            Rare: ["glasses_rare_shared_0_a"],
-            Epic: ["glasses_epic_shared_0_a"],
+            Common: ["glasses_common_shared_a", "glasses_common_shared_b", "glasses_common_shared_c", "glasses_common_shared_d", "glasses_common_shared_e"],
+            Rare: ["glasses_rare_shared_f", "glasses_rare_shared_g", "glasses_rare_shared_h", "glasses_rare_shared_i", "glasses_rare_shared_j",
+                "glasses_rare_shared_k", "glasses_rare_shared_l", "glasses_rare_shared_m", "glasses_rare_shared_n", "glasses_rare_shared_o",
+                "glasses_rare_shared_p", "glasses_rare_shared_q", "glasses_rare_shared_r"],
+            Epic: ["glasses_epic_shared_f", "glasses_epic_shared_g", "glasses_epic_shared_h", "glasses_epic_shared_i", "glasses_epic_shared_j",
+                "glasses_epic_shared_k", "glasses_epic_shared_l", "glasses_epic_shared_m", "glasses_epic_shared_n", "glasses_epic_shared_o",
+                "glasses_epic_shared_p", "glasses_epic_shared_q", "glasses_epic_shared_r"],
             Legendary: []
         }
     };
     return EquipmentData;
-}());
-var SpellData = (function () {
-    function SpellData() {
-    }
-    return SpellData;
 }());
 /// <reference path="./Code/Chests"/>
 /// <reference path="./Code/Constants"/>

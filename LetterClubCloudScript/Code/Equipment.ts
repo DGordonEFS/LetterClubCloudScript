@@ -25,33 +25,43 @@ class EquipmentData {
 
     public static readonly HeadgearImages: HeadgearImageData = {
         Arena0: {
-            Common: ["glasses_common_arena_0_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena1: {
-            Common: ["glasses_common_arena_1_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                    "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena2: {
-            Common: ["glasses_common_arena_1_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
+                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena3: {
-            Common: ["glasses_common_arena_2_a"],
+            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
+                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
+                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e",
+                "glasses_common_arena_3_a", "glasses_common_arena_3_b", "glasses_common_arena_3_c", "glasses_common_arena_3_d", "glasses_common_arena_3_e"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Shared: {
-            Common: [],
-            Rare: ["glasses_rare_shared_0_a"],
-            Epic: ["glasses_epic_shared_0_a"],
+            Common: ["glasses_common_shared_a", "glasses_common_shared_b", "glasses_common_shared_c", "glasses_common_shared_d", "glasses_common_shared_e"],
+            Rare: ["glasses_rare_shared_f", "glasses_rare_shared_g", "glasses_rare_shared_h", "glasses_rare_shared_i", "glasses_rare_shared_j",
+                "glasses_rare_shared_k", "glasses_rare_shared_l", "glasses_rare_shared_m", "glasses_rare_shared_n", "glasses_rare_shared_o",
+                "glasses_rare_shared_p", "glasses_rare_shared_q", "glasses_rare_shared_r"],
+            Epic: ["glasses_epic_shared_f", "glasses_epic_shared_g", "glasses_epic_shared_h", "glasses_epic_shared_i", "glasses_epic_shared_j",
+                "glasses_epic_shared_k", "glasses_epic_shared_l", "glasses_epic_shared_m", "glasses_epic_shared_n", "glasses_epic_shared_o",
+                "glasses_epic_shared_p", "glasses_epic_shared_q", "glasses_epic_shared_r"],
             Legendary: []
         }
     };
@@ -102,8 +112,9 @@ class EquipmentData {
 
         var equipment: Equipment = {
             Id: "",
-            Type: Constants.HeadGear,
+            Type: Constants.Sunglasses,
             Rarity: rarity,
+            Level: arenaIndex,
             Image: EquipmentData.GetRandomHeadgearImage(rarity, ["Arena" + arenaIndex, "Shared"]),
             LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
             Version: Constants.EquipmentVersion
@@ -139,7 +150,8 @@ interface Equipment {
     Rarity: number,
     Image: string,
     LetterData: EquipmentLetterData,
-    Version: number
+    Version: number,
+    Level: number
 }
 
 interface HeadgearImages {

@@ -37,7 +37,7 @@ class ChestData
             GemsMax: 0,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [1000, 100, 10, 0],
             SpecificItems: []
         };
@@ -58,7 +58,7 @@ class ChestData
             GemsMax: 0,
             LetterTiers: [9, 5, 9, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 100, 1, 0],
             SpecificItems: []
         };
@@ -79,7 +79,7 @@ class ChestData
             GemsMax: 0,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 10, 1, 0],
             SpecificItems: []
         };
@@ -129,7 +129,7 @@ class ChestData
             GemsMax: 3,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 1,
+            RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [1000, 10, 0, 0],
             SpecificItems:[]
         };
