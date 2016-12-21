@@ -14,6 +14,7 @@ var ChestData = (function () {
             CoinsMax: 450,
             GemsMin: 0,
             GemsMax: 0,
+            UniqueLetters: 4,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
@@ -34,6 +35,7 @@ var ChestData = (function () {
             CoinsMax: 2450,
             GemsMin: 0,
             GemsMax: 0,
+            UniqueLetters: 6,
             LetterTiers: [9, 5, 9, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
@@ -54,6 +56,7 @@ var ChestData = (function () {
             CoinsMax: 6050,
             GemsMin: 0,
             GemsMax: 0,
+            UniqueLetters: 8,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
             RandomHeadGears: 0,
@@ -74,6 +77,7 @@ var ChestData = (function () {
             CoinsMax: 100,
             GemsMin: 10,
             GemsMax: 10,
+            UniqueLetters: 26,
             LetterTiers: [0, 0, 0, 0],
             SpecificLetters: [{ Letter: "g", Amount: 3 }, { Letter: "i", Amount: 3 }, { Letter: "a", Amount: 5 }],
             RandomHeadGears: 0,
@@ -99,6 +103,7 @@ var ChestData = (function () {
             CoinsMax: (userProfile.ArenaIndex + 1) * 50,
             GemsMin: 1,
             GemsMax: 3,
+            UniqueLetters: 26,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
@@ -187,37 +192,52 @@ var ChestData = (function () {
         log.debug(internalDataResult.Data[Constants.Letters].Value);
         chestResult.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
         chestResult.Inventory = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
-        log.debug("letters tier 0");
+        log.debug("pull letters");
         // add the new letter values to the existing
-        var letters = [
+        var alphabet = [
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
             "w", "x", "y", "z"
         ];
+        var letters = [];
+        for (var i = 0; i < data.UniqueLetters; i++) {
+            var index = Math.floor(Math.random() * alphabet.length);
+            letters.push(alphabet[index]);
+            alphabet.splice(index, 1);
+        }
+        log.debug("random letters assigned");
+        var pulledLetter = -1;
+        var getLetter = function () {
+            pulledLetter++;
+            if (pulledLetter < letters.length)
+                return letters[pulledLetter];
+            return letters[Math.floor(Math.random() * letters.length)];
+        };
+        log.debug("letters tier 0");
         var letter;
         var amount;
         for (var i = 0; i < letterTiers[0]; i++) {
-            letter = letters[Math.floor(Math.random() * 26)];
+            letter = getLetter();
             amount = 1 + Math.floor(Math.random() * 5); // 1 - 5
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
         log.debug("letters tier 1");
         for (var i = 0; i < letterTiers[1]; i++) {
-            letter = letters[Math.floor(Math.random() * 26)];
+            letter = getLetter();
             amount = 10;
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
         log.debug("letters tier 2");
         for (var i = 0; i < letterTiers[2]; i++) {
-            letter = letters[Math.floor(Math.random() * 26)];
+            letter = getLetter();
             amount = 20;
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
         log.debug("letters tier 3");
         for (var i = 0; i < letterTiers[3]; i++) {
-            letter = letters[Math.floor(Math.random() * 26)];
+            letter = getLetter();
             amount = 50;
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
