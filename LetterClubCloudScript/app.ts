@@ -2,7 +2,6 @@
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
-/// <reference path="./Code/Spells"/>
 
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
@@ -25,7 +24,7 @@ handlers.purchaseChest = function (args, context): ChestResult {
 }
 
 handlers.purchaseDailyLetter = function (args, context) {
-    purchaseDailyLetter(args);
+    return purchaseDailyLetter(args);
 }
 
 handlers.hash = function (args, context) {
@@ -195,11 +194,11 @@ var purchaseDailyLetter = function (args) {
 
     var letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
 
-    log.debug("get letters");
+    log.debug("increase letter: " + args.Letter);
     // update the letter
     letters[args.Letter].Amount++;
 
-    log.debug("increase letter amount");
+    log.debug("increase letter amount: " + letters[args.Letter].Amount);
     var data: { [keys: string]: string } = {};
     data[Constants.Letters] = JSON.stringify(letters);
     // send the modified values back to the player's internal data

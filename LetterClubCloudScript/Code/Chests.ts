@@ -59,7 +59,7 @@ class ChestData
             GemsMin: 0,
             GemsMax: 0,
             UniqueLetters: 6,
-            LetterTiers: [9, 5, 9, 0],
+            LetterTiers: [5, 9, 4, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 100, 1, 0],
@@ -141,6 +141,29 @@ class ChestData
         };
     }
 
+    public static GetStarterChest(): Chest
+    {
+        return {
+            Type: "starter_chest",
+            ChestId: "purple",
+            Index: -1,
+            PriceCode: null,
+            PriceCost: 0,
+            IsSale: false,
+            SalePrice: -1,
+            CoinsMin: 1000,
+            CoinsMax: 1000,
+            GemsMin: 0,
+            GemsMax: 0,
+            UniqueLetters: 3,
+            LetterTiers: [10, 10, 10, 0],
+            SpecificLetters: [],
+            RandomHeadGears: 0,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
+            SpecificItems: []
+        };
+    }
+
     
     public static GetChests() {
         return {
@@ -148,7 +171,8 @@ class ChestData
             medium_letter_chest: ChestData.GetMediumChest(),
             large_letter_chest: ChestData.GetLargeChest(),
             new_user_chest: ChestData.GetNewUserChest(),
-            reward_chest: ChestData.GetRewardChest()
+            reward_chest: ChestData.GetRewardChest(),
+            starter_chest: ChestData.GetStarterChest()
         };
     }
 
@@ -268,7 +292,7 @@ class ChestData
         var amount: number;
         for (var i = 0; i < letterTiers[0]; i++) {
             letter = getLetter();
-            amount = 1 + Math.floor(Math.random() * 5); // 1 - 5
+            amount = 1 + Math.floor(Math.random() * 3); // 1 - 3
 
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;

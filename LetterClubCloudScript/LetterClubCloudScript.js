@@ -36,7 +36,7 @@ var ChestData = (function () {
             GemsMin: 0,
             GemsMax: 0,
             UniqueLetters: 6,
-            LetterTiers: [9, 5, 9, 0],
+            LetterTiers: [5, 9, 4, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 100, 1, 0],
@@ -111,13 +111,35 @@ var ChestData = (function () {
             SpecificItems: []
         };
     };
+    ChestData.GetStarterChest = function () {
+        return {
+            Type: "starter_chest",
+            ChestId: "purple",
+            Index: -1,
+            PriceCode: null,
+            PriceCost: 0,
+            IsSale: false,
+            SalePrice: -1,
+            CoinsMin: 1000,
+            CoinsMax: 1000,
+            GemsMin: 0,
+            GemsMax: 0,
+            UniqueLetters: 3,
+            LetterTiers: [10, 10, 10, 0],
+            SpecificLetters: [],
+            RandomHeadGears: 0,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
+            SpecificItems: []
+        };
+    };
     ChestData.GetChests = function () {
         return {
             small_letter_chest: ChestData.GetSmallChest(),
             medium_letter_chest: ChestData.GetMediumChest(),
             large_letter_chest: ChestData.GetLargeChest(),
             new_user_chest: ChestData.GetNewUserChest(),
-            reward_chest: ChestData.GetRewardChest()
+            reward_chest: ChestData.GetRewardChest(),
+            starter_chest: ChestData.GetStarterChest()
         };
     };
     ChestData.PurchaseChest = function (data) {
@@ -217,7 +239,7 @@ var ChestData = (function () {
         var amount;
         for (var i = 0; i < letterTiers[0]; i++) {
             letter = getLetter();
-            amount = 1 + Math.floor(Math.random() * 5); // 1 - 5
+            amount = 1 + Math.floor(Math.random() * 3); // 1 - 3
             chestResult.LettersAdded.push({ Letter: letter, Amount: amount });
             chestResult.Letters[letter].Amount += amount;
         }
@@ -597,7 +619,6 @@ var EquipmentData = (function () {
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
-/// <reference path="./Code/Spells"/>
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
 };
@@ -614,7 +635,7 @@ handlers.purchaseChest = function (args, context) {
     return ChestData.PurchaseChest(ChestData.GetChests()[args.Id]);
 };
 handlers.purchaseDailyLetter = function (args, context) {
-    purchaseDailyLetter(args);
+    return purchaseDailyLetter(args);
 };
 handlers.hash = function (args, context) {
     var str = args.str;
@@ -740,10 +761,10 @@ var purchaseDailyLetter = function (args) {
         Keys: [Constants.Letters]
     });
     var letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
-    log.debug("get letters");
+    log.debug("increase letter: " + args.Letter);
     // update the letter
     letters[args.Letter].Amount++;
-    log.debug("increase letter amount");
+    log.debug("increase letter amount: " + letters[args.Letter].Amount);
     var data = {};
     data[Constants.Letters] = JSON.stringify(letters);
     // send the modified values back to the player's internal data
