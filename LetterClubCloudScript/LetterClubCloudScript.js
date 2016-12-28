@@ -111,24 +111,45 @@ var ChestData = (function () {
             SpecificItems: []
         };
     };
-    ChestData.GetStarterChest = function () {
+    ChestData.GetStarterChestSmall = function () {
         return {
-            Type: "starter_chest",
+            Type: "starter_chest_small",
             ChestId: "purple",
             Index: -1,
             PriceCode: null,
             PriceCost: 0,
             IsSale: false,
             SalePrice: -1,
-            CoinsMin: 1000,
-            CoinsMax: 1000,
-            GemsMin: 0,
-            GemsMax: 0,
-            UniqueLetters: 3,
-            LetterTiers: [10, 10, 10, 0],
+            CoinsMin: 500,
+            CoinsMax: 500,
+            GemsMin: 65,
+            GemsMax: 65,
+            UniqueLetters: 4,
+            LetterTiers: [0, 5, 0, 0],
             SpecificLetters: [],
             RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
+            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            SpecificItems: []
+        };
+    };
+    ChestData.GetStarterChestLarge = function () {
+        return {
+            Type: "starter_chest_large",
+            ChestId: "purple",
+            Index: -1,
+            PriceCode: null,
+            PriceCost: 0,
+            IsSale: false,
+            SalePrice: -1,
+            CoinsMin: 2500,
+            CoinsMax: 2500,
+            GemsMin: 325,
+            GemsMax: 325,
+            UniqueLetters: 7,
+            LetterTiers: [0, 1, 2, 4],
+            SpecificLetters: [],
+            RandomHeadGears: 0,
+            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
             SpecificItems: []
         };
     };
@@ -139,7 +160,8 @@ var ChestData = (function () {
             large_letter_chest: ChestData.GetLargeChest(),
             new_user_chest: ChestData.GetNewUserChest(),
             reward_chest: ChestData.GetRewardChest(),
-            starter_chest: ChestData.GetStarterChest()
+            starter_chest_small: ChestData.GetStarterChestSmall(),
+            starter_chest_large: ChestData.GetStarterChestLarge()
         };
     };
     ChestData.PurchaseChest = function (data) {
