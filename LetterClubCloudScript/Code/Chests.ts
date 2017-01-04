@@ -45,8 +45,8 @@ class ChestData
             RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: 1,
+            RandomAvatarRarityWeights: [1, 0, 0, 0],
             SpecificAvatars: []
         };
     }
@@ -70,8 +70,8 @@ class ChestData
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: 1,
+            RandomAvatarRarityWeights: [1, 0, 0, 0],
             SpecificAvatars: []
         };
     }
@@ -95,8 +95,8 @@ class ChestData
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: 1,
+            RandomAvatarRarityWeights: [1, 0, 0, 0],
             SpecificAvatars: []
         };
     }
@@ -426,7 +426,7 @@ class ChestData
 
         
         chestResult.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
-
+        
         for (var i = 0; i < data.RandomAvatars; i++) {
             log.debug("   - create random avatar");
             var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
@@ -445,16 +445,23 @@ class ChestData
             log.debug("rarity: " + rarity);
 
             var avatar = AvatarData.GetRandomAvatar(rarity);
-
+            
             chestResult.AvatarsAdded.push(avatar.Id);
-            chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
+            if (!chestResult.Avatars[avatar.Id].IsPurchased)
+                chestResult.Avatars[avatar.Id].IsPurchased = true;
+            else
+                chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
         }
 
         for (var i = 0; i < data.SpecificAvatars.length; i++) {
             var avatarId = data.SpecificAvatars[i];
 
             chestResult.AvatarsAdded.push(avatarId);
-            chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
+
+            if (!chestResult.Avatars[avatarId].IsPurchased)
+                chestResult.Avatars[avatarId].IsPurchased = true;
+            else
+                chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
         }
 
 
