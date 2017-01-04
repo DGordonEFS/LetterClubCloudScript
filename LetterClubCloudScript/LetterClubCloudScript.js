@@ -19,7 +19,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 1, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetMediumChest = function () {
@@ -40,7 +43,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetLargeChest = function () {
@@ -61,7 +67,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 0, 1, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetNewUserChest = function () {
@@ -82,7 +91,10 @@ var ChestData = (function () {
             SpecificLetters: [{ Letter: "g", Amount: 3 }, { Letter: "i", Amount: 3 }, { Letter: "a", Amount: 5 }],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetRewardChest = function () {
@@ -111,7 +123,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: randomHeadGear,
             RandomHeadGearsRarityWeights: [900, 95, 5, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetStarterChestSmall = function () {
@@ -132,7 +147,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetStarterChestLarge = function () {
@@ -153,7 +171,10 @@ var ChestData = (function () {
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     };
     ChestData.GetChests = function () {
@@ -191,7 +212,9 @@ var ChestData = (function () {
             LettersAdded: [],
             Letters: null,
             ItemsAdded: [],
-            Inventory: null
+            Inventory: null,
+            AvatarsAdded: [],
+            Avatars: null
         };
         log.debug("getInventory()");
         var inventoryResult = server.GetUserInventory({ PlayFabId: currentPlayerId });
@@ -321,11 +344,35 @@ var ChestData = (function () {
             chestResult.ItemsAdded.push(equipment);
             chestResult.Inventory.push(equipment);
         }
+        chestResult.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+        for (var i = 0; i < data.RandomAvatars; i++) {
+            log.debug("   - create random avatar");
+            var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
+            var rarity;
+            if (rarityIndex < data.RandomAvatarRarityWeights[0])
+                rarity = Constants.Common;
+            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1])
+                rarity = Constants.Rare;
+            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1] + data.RandomAvatarRarityWeights[2])
+                rarity = Constants.Epic;
+            else
+                rarity = Constants.Legendary;
+            log.debug("rarity: " + rarity);
+            var avatar = AvatarData.GetRandomAvatar(rarity);
+            chestResult.AvatarsAdded.push(avatar.Id);
+            chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
+        }
+        for (var i = 0; i < data.SpecificAvatars.length; i++) {
+            var avatarId = data.SpecificAvatars[i];
+            chestResult.AvatarsAdded.push(avatarId);
+            chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
+        }
         log.debug("send internal data");
         // send the modified values back to the player's internal data
         var returnData = {};
         returnData[Constants.Letters] = JSON.stringify(chestResult.Letters);
         returnData[Constants.Equipment] = JSON.stringify(chestResult.Inventory);
+        returnData[Constants.Avatars] = JSON.stringify(chestResult.Avatars);
         returnData[Constants.UniqueEquipment] = JSON.stringify(uniqueEquipmentId);
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
@@ -359,12 +406,16 @@ var Constants = (function () {
     Constants.Equipment = "equipment";
     Constants.UniqueEquipment = "unique_equipment";
     Constants.Migration = "migration";
+    Constants.AvatarRanks = "AvatarRanks";
     Constants.EquipmentVersion = 1;
     Constants.Common = 0;
     Constants.Rare = 1;
     Constants.Epic = 2;
     Constants.Legendary = 3;
     Constants.Sunglasses = 0;
+    Constants.XpPerAvatar = 500;
+    Constants.Coins = "CO";
+    Constants.Gems = "Gems";
     return Constants;
 }());
 var PlayerInit = (function () {
@@ -400,28 +451,6 @@ var PlayerInit = (function () {
             z: { Letter: "z", Amount: 0, Rank: 0 }
         };
     };
-    PlayerInit.GetBaseAvatars = function () {
-        return {
-            alien: { IsPurchased: false, Index: 0, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            blue: { IsPurchased: true, Index: 1, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            boxer: { IsPurchased: false, Index: 2, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            cat: { IsPurchased: false, Index: 3, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            clown: { IsPurchased: false, Index: 4, Rarity: 1, LetterData: { a: 3, t: 2, e: 2 } },
-            cow: { IsPurchased: false, Index: 5, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dinosaur: { IsPurchased: false, Index: 6, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dog: { IsPurchased: false, Index: 7, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dragon: { IsPurchased: false, Index: 8, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            fairy: { IsPurchased: false, Index: 9, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            frank: { IsPurchased: false, Index: 10, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            pirate: { IsPurchased: false, Index: 11, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            red: { IsPurchased: true, Index: 12, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robber: { IsPurchased: false, Index: 13, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robot: { IsPurchased: false, Index: 14, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            superhero: { IsPurchased: false, Index: 15, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            teddy: { IsPurchased: false, Index: 16, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            wizard: { IsPurchased: false, Index: 17, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } }
-        };
-    };
     PlayerInit.GetBaseEquipment = function () {
         return [];
     };
@@ -441,7 +470,7 @@ var PlayerInit = (function () {
             result.Letters = PlayerInit.GetBaseLetters();
             log.debug("new letters " + result.Letters);
         }
-        var baseAvatars = PlayerInit.GetBaseAvatars();
+        var baseAvatars = AvatarData.GetAvatars();
         log.debug("avatar key: " + Constants.Avatars);
         log.debug("   " + internalDataResult.Data[Constants.Avatars]);
         if (internalDataResult.Data[Constants.Avatars] != null) {
@@ -452,6 +481,10 @@ var PlayerInit = (function () {
                 var baseAvatar = baseAvatars[key];
                 if (playerAvatar.IsPurchased)
                     baseAvatar.IsPurchased = true;
+                if (playerAvatar.Xp > 0)
+                    baseAvatar.Xp = playerAvatar.Xp;
+                if (playerAvatar.Level > 0)
+                    baseAvatar.Xp = playerAvatar.Level;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
@@ -676,10 +709,76 @@ var EquipmentData = (function () {
     };
     return EquipmentData;
 }());
+var AvatarData = (function () {
+    function AvatarData() {
+    }
+    AvatarData.GetAvatars = function () {
+        return {
+            alien: { Id: "alien", IsPurchased: false, Rarity: 2, Xp: 0, Rank: 0, LetterData: { a: 1, b: 2, c: 3 } },
+            blue: { Id: "blue", IsPurchased: true, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            boxer: { Id: "boxer", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            cat: { Id: "cat", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            clown: { Id: "clown", IsPurchased: false, Rarity: 1, Xp: 0, Rank: 0, LetterData: { a: 3, t: 2, e: 2 } },
+            cow: { Id: "cow", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dinosaur: { Id: "dinosaur", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dog: { Id: "dog", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dragon: { Id: "dragon", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            fairy: { Id: "fairy", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            frank: { Id: "frank", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            pirate: { Id: "pirate", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            red: { Id: "red", IsPurchased: true, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robber: { Id: "robber", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robot: { Id: "robot", IsPurchased: false, Rarity: 2, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            superhero: { Id: "superhero", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            teddy: { Id: "teddy", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            wizard: { Id: "wizard", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } }
+        };
+    };
+    AvatarData.GetRandomAvatar = function (rarity) {
+        var avatars = AvatarData.GetAvatars();
+        var pool = [];
+        for (var id in avatars) {
+            var avatar = avatars[id];
+            if (avatar.Rarity == rarity)
+                pool.push(avatar);
+        }
+        return pool[Math.floor(Math.random() * pool.length)];
+    };
+    AvatarData.IncreaseAvatarRank = function (args) {
+        var internalDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: [Constants.AvatarRanks]
+        });
+        var avatarRanks = JSON.parse(internalDataResult.Data[Constants.AvatarRanks].Value);
+        var internalDataResult = server.GetUserInternalData({
+            PlayFabId: currentPlayerId,
+            Keys: [Constants.Avatars]
+        });
+        var avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+        var avatar = avatars[args.Id];
+        var rankData = avatarRanks[avatar.Rank];
+        var currencyResult = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: Constants.Coins,
+            Amount: rankData.Cost
+        });
+        avatar.Rank++;
+        var data = {};
+        data[Constants.Avatars] = JSON.stringify(avatars);
+        // send the modified values back to the player's internal data
+        internalDataResult = server.UpdateUserInternalData({
+            PlayFabId: currentPlayerId,
+            Data: data
+        });
+        return avatars;
+    };
+    return AvatarData;
+}());
 /// <reference path="./Code/Chests"/>
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
+/// <reference path="./Code/Avatars"/>
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
 };
@@ -697,6 +796,9 @@ handlers.purchaseChest = function (args, context) {
 };
 handlers.purchaseDailyLetter = function (args, context) {
     return purchaseDailyLetter(args);
+};
+handlers.increaseAvatarRank = function (args, context) {
+    return AvatarData.IncreaseAvatarRank(args);
 };
 handlers.hash = function (args, context) {
     var str = args.str;

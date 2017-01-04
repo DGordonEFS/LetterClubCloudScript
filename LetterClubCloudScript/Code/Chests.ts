@@ -17,7 +17,10 @@ interface Chest {
     SpecificLetters: { Letter: string, Amount: number }[],
     RandomHeadGears: number,
     RandomHeadGearsRarityWeights: [number, number, number, number],
-    SpecificItems: Equipment[]
+    SpecificItems: Equipment[],
+    RandomAvatars: number,
+    RandomAvatarRarityWeights: [number, number, number, number],
+    SpecificAvatars: string[]
 }
 
 class ChestData
@@ -41,7 +44,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 1, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -63,7 +69,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -85,7 +94,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: 2,
             RandomHeadGearsRarityWeights: [0, 0, 1, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -107,7 +119,10 @@ class ChestData
             SpecificLetters: [{ Letter: "g", Amount: 3 }, { Letter: "i", Amount: 3 }, { Letter: "a", Amount: 5 }],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -142,7 +157,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: randomHeadGear,
             RandomHeadGearsRarityWeights: [900, 95, 5, 0],
-            SpecificItems:[]
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -165,7 +183,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -187,7 +208,10 @@ class ChestData
             SpecificLetters: [],
             RandomHeadGears: 0,
             RandomHeadGearsRarityWeights: [0, 0, 0, 0],
-            SpecificItems: []
+            SpecificItems: [],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            SpecificAvatars: []
         };
     }
 
@@ -231,7 +255,9 @@ class ChestData
             LettersAdded: [],
             Letters: null,
             ItemsAdded: [],
-            Inventory: null
+            Inventory: null,
+            AvatarsAdded: [],
+            Avatars: null
         }
 
         log.debug("getInventory()");
@@ -398,11 +424,46 @@ class ChestData
             chestResult.Inventory.push(equipment);
         }
 
+        
+        chestResult.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+
+        for (var i = 0; i < data.RandomAvatars; i++) {
+            log.debug("   - create random avatar");
+            var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
+            var rarity;
+            
+            if (rarityIndex < data.RandomAvatarRarityWeights[0])
+                rarity = Constants.Common;
+            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1])
+                rarity = Constants.Rare;
+            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1] + data.RandomAvatarRarityWeights[2])
+                rarity = Constants.Epic;
+            else
+                rarity = Constants.Legendary;
+
+
+            log.debug("rarity: " + rarity);
+
+            var avatar = AvatarData.GetRandomAvatar(rarity);
+
+            chestResult.AvatarsAdded.push(avatar.Id);
+            chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
+        }
+
+        for (var i = 0; i < data.SpecificAvatars.length; i++) {
+            var avatarId = data.SpecificAvatars[i];
+
+            chestResult.AvatarsAdded.push(avatarId);
+            chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
+        }
+
+
         log.debug("send internal data");
         // send the modified values back to the player's internal data
         var returnData: { [keys: string]: string } = {};
         returnData[Constants.Letters] = JSON.stringify(chestResult.Letters);
         returnData[Constants.Equipment] = JSON.stringify(chestResult.Inventory);
+        returnData[Constants.Avatars] = JSON.stringify(chestResult.Avatars);
         returnData[Constants.UniqueEquipment] = JSON.stringify(uniqueEquipmentId);
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
@@ -449,5 +510,7 @@ interface ChestResult {
     LettersAdded: { Letter: string, Amount: number }[],
     Letters: {},
     ItemsAdded: Equipment[],
-    Inventory: Equipment[]
+    Inventory: Equipment[],
+    AvatarsAdded: string[],
+    Avatars: AvatarList
 }

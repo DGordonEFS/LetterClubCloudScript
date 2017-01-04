@@ -31,30 +31,7 @@ class PlayerInit {
             z: { Letter: "z", Amount: 0, Rank: 0 }
         };
     }
-
-    public static GetBaseAvatars() {
-        return {
-            alien: { IsPurchased: false, Index: 0, Rarity: 0, LetterData:{a: 1, b: 1, c: 1 } },
-            blue: { IsPurchased: true, Index: 1, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            boxer: { IsPurchased: false, Index: 2, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            cat: { IsPurchased: false, Index: 3, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            clown: { IsPurchased: false, Index: 4, Rarity: 1, LetterData: { a: 3, t: 2, e: 2 } },
-            cow: { IsPurchased: false, Index: 5, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dinosaur: { IsPurchased: false, Index: 6, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dog: { IsPurchased: false, Index: 7, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dragon: { IsPurchased: false, Index: 8, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            fairy: { IsPurchased: false, Index: 9, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            frank: { IsPurchased: false, Index: 10, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            pirate: { IsPurchased: false, Index: 11, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            red: { IsPurchased: true, Index: 12, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robber: { IsPurchased: false, Index: 13, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robot: { IsPurchased: false, Index: 14, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            superhero: { IsPurchased: false, Index: 15, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            teddy: { IsPurchased: false, Index: 16, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            wizard: { IsPurchased: false, Index: 17, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } }
-        };
-    }
-
+    
     public static GetBaseEquipment() {
         return [];
     }
@@ -78,7 +55,7 @@ class PlayerInit {
             log.debug("new letters " + result.Letters);
         }
         
-        var baseAvatars = PlayerInit.GetBaseAvatars();
+        var baseAvatars = AvatarData.GetAvatars();
 
         log.debug("avatar key: " + Constants.Avatars);
         log.debug("   " + internalDataResult.Data[Constants.Avatars]);
@@ -91,6 +68,10 @@ class PlayerInit {
                 var baseAvatar = baseAvatars[key];
                 if (playerAvatar.IsPurchased)
                     baseAvatar.IsPurchased = true;
+                if (playerAvatar.Xp > 0)
+                    baseAvatar.Xp = playerAvatar.Xp;
+                if (playerAvatar.Level > 0)
+                    baseAvatar.Xp = playerAvatar.Level;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }

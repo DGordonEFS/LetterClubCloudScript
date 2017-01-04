@@ -2,6 +2,7 @@
 /// <reference path="./Code/Constants"/>
 /// <reference path="./Code/PlayerInit"/>
 /// <reference path="./Code/Equipment"/>
+/// <reference path="./Code/Avatars"/>
 
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
@@ -25,6 +26,10 @@ handlers.purchaseChest = function (args, context): ChestResult {
 
 handlers.purchaseDailyLetter = function (args, context) {
     return purchaseDailyLetter(args);
+}
+
+handlers.increaseAvatarRank = function (args, context): AvatarList {
+    return AvatarData.IncreaseAvatarRank(args);
 }
 
 handlers.hash = function (args, context) {
