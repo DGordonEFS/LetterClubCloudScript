@@ -4,6 +4,47 @@
 /// <reference path="./Code/Equipment"/>
 /// <reference path="./Code/Avatars"/>
 
+handlers.pickNewDailyLetters = function(){
+  var lettersForThisMonthKey = "DailyLettersForThisMonth";
+  var titleData = server.GetTitleInternalData({keys: [lettersForThisMonthKey]});
+  var lettersForThisMonth = titleData["Data"][lettersForThisMonthKey];
+  lettersForThisMonth = JSON.parse(lettersForThisMonth);
+  if(lettersForToday.length > 0) {
+    var lettersForToday = lettersForThisMonth.pop();
+    server.SetTitleData({key:"DailySaleLetter0", value:lettersForToday[0]});
+    server.SetTitleData({key:"DailySaleLetter1", value:lettersForToday[1]});
+    server.SetTitleData({key:"DailySaleLetter2", value:lettersForToday[2]});
+    server.SetTitleInternalData({key: lettersForThisMonthKey, value:JSON.stringify(lettersForThisMonth)});
+  }
+}
+
+handlers.resetLeaderboard = function(data){
+    handlers.awardTopPlayers();
+    var url = "https://53BC.playfabapi.com/admin/IncrementPlayerStatisticVersion";
+    var method = "post";
+    var contentBody = JSON.stringify({StatisticName: "Game Score"});
+    var contentType = "application/json";
+    var headers = {"X-SecretKey" : "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G"};
+    var responseString =  http.request(url,method,contentBody,contentType,headers); 
+    log.debug(responseString);  
+}
+
+handlers.awardTopPlayers = function() {
+    var request = {
+        StatisticName: "Game Score",
+        MaxResultsCount: 10,
+        StartPosition: 0
+    };
+    var leaderboard = server.GetLeaderboard(request);
+    leaderboard.Leaderboard.forEach(function(e,i) {
+        server.AddPlayerTag({
+            PlayFabId: e.PlayFabId,
+            TagName: "TopPlayerTest"
+        });
+    });
+}
+
+
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);
 }
