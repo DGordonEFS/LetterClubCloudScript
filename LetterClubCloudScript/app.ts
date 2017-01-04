@@ -9,7 +9,7 @@ handlers.pickNewDailyLetters = function(){
   var titleData = server.GetTitleInternalData({keys: [lettersForThisMonthKey]});
   var lettersForThisMonth = titleData["Data"][lettersForThisMonthKey];
   lettersForThisMonth = JSON.parse(lettersForThisMonth);
-  if(lettersForToday.length > 0) {
+  if(lettersForThisMonth.length > 0) {
     var lettersForToday = lettersForThisMonth.pop();
     server.SetTitleData({key:"DailySaleLetter0", value:lettersForToday[0]});
     server.SetTitleData({key:"DailySaleLetter1", value:lettersForToday[1]});
