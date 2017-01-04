@@ -17,8 +17,8 @@ var ChestData = (function () {
             UniqueLetters: 4,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [1000, 100, 10, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: []
         };
     };
@@ -38,8 +38,8 @@ var ChestData = (function () {
             UniqueLetters: 6,
             LetterTiers: [5, 9, 4, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 100, 1, 0],
+            RandomHeadGears: 2,
+            RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: []
         };
     };
@@ -59,8 +59,8 @@ var ChestData = (function () {
             UniqueLetters: 8,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 10, 1, 0],
+            RandomHeadGears: 2,
+            RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: []
         };
     };
@@ -91,6 +91,9 @@ var ChestData = (function () {
             Keys: ["profile"]
         });
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
+        var randomHeadGear = 0;
+        if (Math.random() < 0.33)
+            randomHeadGear = 1;
         return {
             Type: "reward_chest",
             ChestId: "purple",
@@ -106,8 +109,8 @@ var ChestData = (function () {
             UniqueLetters: 26,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [1000, 10, 0, 0],
+            RandomHeadGears: randomHeadGear,
+            RandomHeadGearsRarityWeights: [900, 95, 5, 0],
             SpecificItems: []
         };
     };
@@ -399,24 +402,24 @@ var PlayerInit = (function () {
     };
     PlayerInit.GetBaseAvatars = function () {
         return {
-            alien: { IsPurchased: false, Index: 0 },
-            blue: { IsPurchased: true, Index: 1 },
-            boxer: { IsPurchased: false, Index: 2 },
-            cat: { IsPurchased: false, Index: 3 },
-            clown: { IsPurchased: false, Index: 4 },
-            cow: { IsPurchased: false, Index: 5 },
-            dinosaur: { IsPurchased: false, Index: 6 },
-            dog: { IsPurchased: false, Index: 7 },
-            dragon: { IsPurchased: false, Index: 8 },
-            fairy: { IsPurchased: false, Index: 9 },
-            frank: { IsPurchased: false, Index: 10 },
-            pirate: { IsPurchased: false, Index: 11 },
-            red: { IsPurchased: false, Index: 12 },
-            robber: { IsPurchased: false, Index: 13 },
-            robot: { IsPurchased: false, Index: 14 },
-            superhero: { IsPurchased: false, Index: 15 },
-            teddy: { IsPurchased: false, Index: 16 },
-            wizard: { IsPurchased: false, Index: 17 }
+            alien: { IsPurchased: false, Index: 0, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            blue: { IsPurchased: true, Index: 1, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            boxer: { IsPurchased: false, Index: 2, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            cat: { IsPurchased: false, Index: 3, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            clown: { IsPurchased: false, Index: 4, Rarity: 1, LetterData: { a: 3, t: 2, e: 2 } },
+            cow: { IsPurchased: false, Index: 5, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dinosaur: { IsPurchased: false, Index: 6, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dog: { IsPurchased: false, Index: 7, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dragon: { IsPurchased: false, Index: 8, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            fairy: { IsPurchased: false, Index: 9, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            frank: { IsPurchased: false, Index: 10, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            pirate: { IsPurchased: false, Index: 11, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            red: { IsPurchased: true, Index: 12, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robber: { IsPurchased: false, Index: 13, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robot: { IsPurchased: false, Index: 14, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            superhero: { IsPurchased: false, Index: 15, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            teddy: { IsPurchased: false, Index: 16, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            wizard: { IsPurchased: false, Index: 17, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } }
         };
     };
     PlayerInit.GetBaseEquipment = function () {
@@ -447,7 +450,8 @@ var PlayerInit = (function () {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                baseAvatar.IsPurchased = playerAvatar.IsPurchased;
+                if (playerAvatar.IsPurchased)
+                    baseAvatar.IsPurchased = true;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
@@ -545,14 +549,38 @@ var EquipmentData = (function () {
         });
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
         var arenaIndex = userProfile.ArenaIndex;
+        var letterData = EquipmentData.GetRandomLetters(arenaIndex, rarity);
+        var headgearImage;
+        switch (rarity) {
+            case Constants.Common:
+                var letters = [
+                    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+                    "w", "x", "y", "z"
+                ];
+                var highestLetter;
+                var highestAmount = 0;
+                for (var letter in letterData) {
+                    var amount = letterData[letter];
+                    if (amount > highestAmount) {
+                        highestAmount = amount;
+                        highestLetter = letter;
+                    }
+                }
+                var letterIndex = letters.indexOf(highestLetter);
+                headgearImage = EquipmentData.HeadgearImages["Arena" + arenaIndex]["Common"][letterIndex];
+                break;
+            default:
+                headgearImage = EquipmentData.GetRandomHeadgearImage(rarity, ["Arena" + arenaIndex, "Shared"]);
+                break;
+        }
         log.debug("arenaindex");
         var equipment = {
             Id: "",
             Type: Constants.Sunglasses,
             Rarity: rarity,
             Level: arenaIndex,
-            Image: EquipmentData.GetRandomHeadgearImage(rarity, ["Arena" + arenaIndex, "Shared"]),
-            LetterData: EquipmentData.GetRandomLetters(arenaIndex, rarity),
+            Image: headgearImage,
+            LetterData: letterData,
             Version: Constants.EquipmentVersion
         };
         log.debug("equipment: " + equipment);
@@ -595,43 +623,54 @@ var EquipmentData = (function () {
     };
     EquipmentData.HeadgearImages = {
         Arena0: {
-            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e"],
+            Common: ["c_a0_0", "c_a0_1", "c_a0_2", "c_a0_3", "c_a0_4", "c_a0_5", "c_a0_6", "c_a0_7", "c_a0_8", "c_a0_9", "c_a0_10", "c_a0_11", "c_a0_12", "c_a0_13", "c_a0_14", "c_a0_15",
+                "c_a0_16", "c_a0_17", "c_a0_18", "c_a0_19", "c_a0_20", "c_a0_21", "c_a0_22", "c_a0_23", "c_a0_24", "c_a0_25"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena1: {
-            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
-                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e"],
+            Common: ["c_a1_0", "c_a1_1", "c_a1_2", "c_a1_3", "c_a1_4", "c_a1_5", "c_a1_6", "c_a1_7", "c_a1_8", "c_a1_9", "c_a1_10", "c_a1_11", "c_a1_12", "c_a1_13", "c_a1_14", "c_a1_15",
+                "c_a1_16", "c_a1_17", "c_a1_18", "c_a1_19", "c_a1_20", "c_a1_21", "c_a1_22", "c_a1_23", "c_a1_24", "c_a1_25"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena2: {
-            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
-                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
-                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e"],
+            Common: ["c_a2_0", "c_a2_1", "c_a2_2", "c_a2_3", "c_a2_4", "c_a2_5", "c_a2_6", "c_a2_7", "c_a2_8", "c_a2_9", "c_a2_10", "c_a2_11", "c_a2_12", "c_a2_13", "c_a2_14", "c_a2_15",
+                "c_a2_16", "c_a2_17", "c_a2_18", "c_a2_19", "c_a2_20", "c_a2_21", "c_a2_22", "c_a2_23", "c_a2_24", "c_a2_25"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Arena3: {
-            Common: ["glasses_common_arena_0_a", "glasses_common_arena_0_b", "glasses_common_arena_0_c", "glasses_common_arena_0_d", "glasses_common_arena_0_e",
-                "glasses_common_arena_1_a", "glasses_common_arena_1_b", "glasses_common_arena_1_c", "glasses_common_arena_1_d", "glasses_common_arena_1_e",
-                "glasses_common_arena_2_a", "glasses_common_arena_2_b", "glasses_common_arena_2_c", "glasses_common_arena_2_d", "glasses_common_arena_2_e",
-                "glasses_common_arena_3_a", "glasses_common_arena_3_b", "glasses_common_arena_3_c", "glasses_common_arena_3_d", "glasses_common_arena_3_e"],
+            Common: ["c_a3_0", "c_a3_1", "c_a3_2", "c_a3_3", "c_a3_4", "c_a3_5", "c_a3_6", "c_a3_7", "c_a3_8", "c_a3_9", "c_a3_10", "c_a3_11", "c_a3_12", "c_a3_13", "c_a3_14", "c_a3_15",
+                "c_a3_16", "c_a3_17", "c_a3_18", "c_a3_19", "c_a3_20", "c_a3_21", "c_a3_22", "c_a3_23", "c_a3_24", "c_a3_25"],
             Rare: [],
             Epic: [],
             Legendary: []
         },
         Shared: {
-            Common: ["glasses_common_shared_a", "glasses_common_shared_b", "glasses_common_shared_c", "glasses_common_shared_d", "glasses_common_shared_e"],
-            Rare: ["glasses_rare_shared_f", "glasses_rare_shared_g", "glasses_rare_shared_h", "glasses_rare_shared_i", "glasses_rare_shared_j",
-                "glasses_rare_shared_k", "glasses_rare_shared_l", "glasses_rare_shared_m", "glasses_rare_shared_n", "glasses_rare_shared_o",
-                "glasses_rare_shared_p", "glasses_rare_shared_q", "glasses_rare_shared_r"],
-            Epic: ["glasses_epic_shared_f", "glasses_epic_shared_g", "glasses_epic_shared_h", "glasses_epic_shared_i", "glasses_epic_shared_j",
-                "glasses_epic_shared_k", "glasses_epic_shared_l", "glasses_epic_shared_m", "glasses_epic_shared_n", "glasses_epic_shared_o",
-                "glasses_epic_shared_p", "glasses_epic_shared_q", "glasses_epic_shared_r"],
+            Common: [],
+            Rare: ["r_twoHearts_0", "r_twoHearts_1", "r_twoHearts_2", "r_twoHearts_3", "r_twoHearts_4", "r_twoHearts_5", "r_twoHearts_6", "r_twoHearts_7", "r_twoHearts_8", "r_twoHearts_9",
+                "r_fourEyes_0", "r_fourEyes_1", "r_fourEyes_2", "r_fourEyes_3", "r_fourEyes_4", "r_fourEyes_5", "r_fourEyes_6", "r_fourEyes_7", "r_fourEyes_8", "r_fourEyes_9",
+                "r_anime_0", "r_anime_1", "r_anime_2", "r_anime_3", "r_anime_4", "r_anime_5", "r_anime_6", "r_anime_7", "r_anime_8", "r_anime_9",
+                "r_cat_0", "r_cat_1", "r_cat_2", "r_cat_3", "r_cat_4", "r_cat_5", "r_cat_6", "r_cat_7", "r_cat_8", "r_cat_9",
+                "r_pyramid_0", "r_pyramid_1", "r_pyramid_2", "r_pyramid_3", "r_pyramid_4", "r_pyramid_5", "r_pyramid_6", "r_pyramid_7", "r_pyramid_8", "r_pyramid_9",
+                "r_round_0", "r_round_1", "r_round_2", "r_round_3", "r_round_4", "r_round_5", "r_round_6", "r_round_7", "r_round_8", "r_round_9",
+                "r_shutter_0", "r_shutter_1", "r_shutter_2", "r_shutter_3", "r_shutter_4", "r_shutter_5", "r_shutter_6", "r_shutter_7", "r_shutter_8", "r_shutter_9",
+                "r_star_0", "r_star_1", "r_star_2", "r_star_3", "r_star_4", "r_star_5", "r_star_6", "r_star_7", "r_star_8", "r_star_9",
+                "r_visor_0", "r_visor_1", "r_visor_2", "r_visor_3", "r_visor_4", "r_visor_5", "r_visor_6", "r_visor_7", "r_visor_8", "r_visor_9",
+                "r_vr_0", "r_vr_1", "r_vr_2", "r_vr_3", "r_vr_4", "r_vr_5", "r_vr_6", "r_vr_7", "r_vr_8", "r_vr_9",
+                "r_wings_0", "r_wings_1", "r_wings_2", "r_wings_3", "r_wings_4", "r_wings_5", "r_wings_6", "r_wings_7", "r_wings_8", "r_wings_9"],
+            Epic: ["e_bunny_0", "e_bunny_1", "e_bunny_2", "e_bunny_3", "e_bunny_4",
+                "e_donut_0", "e_donut_1", "e_donut_2", "e_donut_3", "e_donut_4",
+                "e_eyepatch_0", "e_eyepatch_1", "e_eyepatch_2", "e_eyepatch_3", "e_eyepatch_4",
+                "e_hypno_0", "e_hypno_1", "e_hypno_2", "e_hypno_3", "e_hypno_4",
+                "e_mustache_0", "e_mustache_1", "e_mustache_2", "e_mustache_3", "e_mustache_4",
+                "e_scuba_0", "e_scuba_1", "e_scuba_2", "e_scuba_3", "e_scuba_4",
+                "e_steampunk_0", "e_steampunk_1", "e_steampunk_2", "e_steampunk_3", "e_steampunk_4",
+                "e_oldman_0", "e_oldman_1", "e_oldman_2", "e_oldman_3", "e_oldman_4"],
             Legendary: []
         }
     };

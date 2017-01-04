@@ -34,24 +34,24 @@ class PlayerInit {
 
     public static GetBaseAvatars() {
         return {
-            alien: { IsPurchased: false, Index: 0 },
-            blue: { IsPurchased: true, Index: 1 },
-            boxer: { IsPurchased: false, Index: 2 },
-            cat: { IsPurchased: false, Index: 3 },
-            clown: { IsPurchased: false, Index: 4 },
-            cow: { IsPurchased: false, Index: 5 },
-            dinosaur: { IsPurchased: false, Index: 6 },
-            dog: { IsPurchased: false, Index: 7 },
-            dragon: { IsPurchased: false, Index: 8 },
-            fairy: { IsPurchased: false, Index: 9 },
-            frank: { IsPurchased: false, Index: 10 },
-            pirate: { IsPurchased: false, Index: 11 },
-            red: { IsPurchased: false, Index: 12 },
-            robber: { IsPurchased: false, Index: 13 },
-            robot: { IsPurchased: false, Index: 14 },
-            superhero: { IsPurchased: false, Index: 15 },
-            teddy: { IsPurchased: false, Index: 16 },
-            wizard: { IsPurchased: false, Index: 17 }
+            alien: { IsPurchased: false, Index: 0, Rarity: 0, LetterData:{a: 1, b: 1, c: 1 } },
+            blue: { IsPurchased: true, Index: 1, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            boxer: { IsPurchased: false, Index: 2, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            cat: { IsPurchased: false, Index: 3, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            clown: { IsPurchased: false, Index: 4, Rarity: 1, LetterData: { a: 3, t: 2, e: 2 } },
+            cow: { IsPurchased: false, Index: 5, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dinosaur: { IsPurchased: false, Index: 6, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dog: { IsPurchased: false, Index: 7, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            dragon: { IsPurchased: false, Index: 8, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            fairy: { IsPurchased: false, Index: 9, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            frank: { IsPurchased: false, Index: 10, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            pirate: { IsPurchased: false, Index: 11, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            red: { IsPurchased: true, Index: 12, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robber: { IsPurchased: false, Index: 13, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            robot: { IsPurchased: false, Index: 14, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            superhero: { IsPurchased: false, Index: 15, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            teddy: { IsPurchased: false, Index: 16, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } },
+            wizard: { IsPurchased: false, Index: 17, Rarity: 0, LetterData: { a: 1, b: 1, c: 1 } }
         };
     }
 
@@ -89,7 +89,8 @@ class PlayerInit {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                baseAvatar.IsPurchased = playerAvatar.IsPurchased;
+                if (playerAvatar.IsPurchased)
+                    baseAvatar.IsPurchased = true;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }

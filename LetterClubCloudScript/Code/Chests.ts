@@ -39,8 +39,8 @@ class ChestData
             UniqueLetters: 4,
             LetterTiers: [9, 1, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [1000, 100, 10, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: []
         };
     }
@@ -61,8 +61,8 @@ class ChestData
             UniqueLetters: 6,
             LetterTiers: [5, 9, 4, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 100, 1, 0],
+            RandomHeadGears: 2,
+            RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: []
         };
     }
@@ -83,8 +83,8 @@ class ChestData
             UniqueLetters: 8,
             LetterTiers: [0, 16, 12, 2],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 10, 1, 0],
+            RandomHeadGears: 2,
+            RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: []
         };
     }
@@ -120,6 +120,11 @@ class ChestData
 
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
 
+
+        var randomHeadGear = 0;
+        if (Math.random() < 0.33) 
+            randomHeadGear = 1;
+        
         return {
             Type: "reward_chest",
             ChestId: "purple",
@@ -135,8 +140,8 @@ class ChestData
             UniqueLetters: 26,
             LetterTiers: [userProfile.ArenaIndex + 2, 0, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [1000, 10, 0, 0],
+            RandomHeadGears: randomHeadGear,
+            RandomHeadGearsRarityWeights: [900, 95, 5, 0],
             SpecificItems:[]
         };
     }
