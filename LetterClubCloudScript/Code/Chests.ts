@@ -139,6 +139,10 @@ class ChestData
         var randomHeadGear = 0;
         if (Math.random() < 0.33) 
             randomHeadGear = 1;
+
+        var randomAvatar = 0;
+        if (Math.random() < 0.1)
+            randomAvatar = 1;
         
         return {
             Type: "reward_chest",
@@ -158,8 +162,8 @@ class ChestData
             RandomHeadGears: randomHeadGear,
             RandomHeadGearsRarityWeights: [900, 95, 5, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: randomAvatar,
+            RandomAvatarRarityWeights: [900, 90, 5, 0],
             SpecificAvatars: []
         };
     }
