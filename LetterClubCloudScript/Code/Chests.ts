@@ -451,8 +451,8 @@ class ChestData
             var avatar = AvatarData.GetRandomAvatar(rarity);
             
             chestResult.AvatarsAdded.push(avatar.Id);
-            if (!chestResult.Avatars[avatar.Id].IsPurchased)
-                chestResult.Avatars[avatar.Id].IsPurchased = true;
+            if (!chestResult.Avatars[avatar.Id].Owned)
+                chestResult.Avatars[avatar.Id].Owned = true;
             else
                 chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
         }
@@ -462,8 +462,8 @@ class ChestData
 
             chestResult.AvatarsAdded.push(avatarId);
 
-            if (!chestResult.Avatars[avatarId].IsPurchased)
-                chestResult.Avatars[avatarId].IsPurchased = true;
+            if (!chestResult.Avatars[avatarId].Owned)
+                chestResult.Avatars[avatarId].Owned = true;
             else
                 chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
         }

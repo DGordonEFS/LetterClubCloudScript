@@ -3,37 +3,42 @@ class AvatarData {
     
     public static GetAvatars(): AvatarList  {
         return {
-            alien: { Id:"alien", IsPurchased: false, Rarity: 2, Xp:0, Rank:0, LetterData: { a: 1, b: 2, c: 3 } },
-            blue: { Id: "blue", IsPurchased: true, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            boxer: { Id: "boxer", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            cat: { Id: "cat", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            clown: { Id: "clown", IsPurchased: false, Rarity: 1, Xp: 0, Rank: 0, LetterData: { a: 3, t: 2, e: 2 } },
-            cow: { Id: "cow", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dinosaur: { Id: "dinosaur", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dog: { Id: "dog", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            dragon: { Id: "dragon", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            fairy: { Id: "fairy", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            frank: { Id: "frank", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            pirate: { Id: "pirate", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            red: { Id: "red", IsPurchased: true, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robber: { Id: "robber", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            robot: { Id: "robot", IsPurchased: false, Rarity: 2, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            superhero: { Id: "superhero", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            teddy: { Id: "teddy", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } },
-            wizard: { Id: "wizard", IsPurchased: false, Rarity: 0, Xp: 0, Rank: 0, LetterData: { a: 1, b: 1, c: 1 } }
+            alien: { Owned: false, Xp: 0, Rank: 0 },
+            blue: { Owned: true, Xp: 0, Rank: 0 },
+            boxer: { Owned: false, Xp: 0, Rank: 0 },
+            cat: { Owned: false, Xp: 0, Rank: 0 },
+            clown: { Owned: false, Xp: 0, Rank: 0 },
+            cow: { Owned: false, Xp: 0, Rank: 0 },
+            dinosaur: { Owned: false, Xp: 0, Rank: 0 },
+            dog: { Owned: false, Xp: 0, Rank: 0 },
+            dragon: { Owned: false, Xp: 0, Rank: 0 },
+            fairy: { Owned: false, Xp: 0, Rank: 0 },
+            frank: { Owned: false, Xp: 0, Rank: 0 },
+            pirate: { Owned: false, Xp: 0, Rank: 0 },
+            red: { Owned: true, Xp: 0, Rank: 0 },
+            robber: { Owned: false, Xp: 0, Rank: 0 },
+            robot: { Owned: false, Xp: 0, Rank: 0 },
+            superhero: { Owned: false, Xp: 0, Rank: 0 },
+            teddy: { Owned: false, Xp: 0, Rank: 0 },
+            wizard: { Owned: false, Xp: 0, Rank: 0 }
         };
     }
 
-    public static GetRandomAvatar(rarity: number) : Avatar
+    public static GetRandomAvatar(rarity: number): AvatarId
     {
+        var dataResult = server.GetTitleData({
+            Keys: ["Avatars"]
+        });
+        
+        var avatarsData = JSON.parse(dataResult.Data["Avatars"]);
         var avatars = AvatarData.GetAvatars();
-        var pool: Avatar[] = [];
+        var pool: AvatarId[] = [];
 
         for (var id in avatars) {
             var avatar = avatars[id];
-
-            if (avatar.Rarity == rarity)
-                pool.push(avatar);
+            var avatarRarity:number = avatarsData[id].Rarity;
+            if (avatarRarity == rarity)
+                pool.push({ Id: id, Avatar: avatar });
         }
 
         return pool[Math.floor(Math.random() * pool.length)];
@@ -41,17 +46,18 @@ class AvatarData {
 
     public static IncreaseAvatarRank(args): AvatarList
     {
-        var internalDataResult = server.GetUserData({
-            PlayFabId: currentPlayerId,
-            Keys: [Constants.AvatarRanks]
+        var titleDataResult = server.GetTitleData({
+            Keys: [Constants.AvatarRanks, Constants.Avatars]
         });
-        var avatarRanks = JSON.parse(internalDataResult.Data[Constants.AvatarRanks].Value);
+        var avatarRanks = JSON.parse(titleDataResult.Data[Constants.AvatarRanks]);
+        var avatarsData = JSON.parse(titleDataResult.Data[Constants.Avatars]);
 
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
             Keys: [Constants.Avatars]
         });
-        var avatars: AvatarList = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+        var avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+
 
         var avatar:Avatar = avatars[args.Id];
 
@@ -79,18 +85,21 @@ class AvatarData {
 }
 
 type AvatarList = { [keys: string]: Avatar }
-type AvatarLetterData = { [keys: string]: number };
 
 interface Avatar {
-    Id: string,
-    IsPurchased: boolean,
-    Rarity: number,
+    Owned: boolean,
     Xp: number,
-    Rank: number,
-    LetterData: AvatarLetterData
+    Rank: number
 }
+
+
+type AvatarRanksData = { [keys: string]: AvatarRankData }
+type AvatarRankData = { LetterData: AvatarLetterData, BuffData: BuffData }
+type AvatarLetterData = { [keys: string]: number };
 
 interface AvatarRank {
     Xp: number,
     Cost: number
 }
+
+type AvatarId = { Id: string, Avatar: Avatar }

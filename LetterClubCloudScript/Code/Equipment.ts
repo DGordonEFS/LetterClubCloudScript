@@ -157,6 +157,7 @@ class EquipmentData {
             Type: Constants.Sunglasses,
             Rarity: rarity,
             Level: arenaIndex,
+            BuffData: {},
             Image: headgearImage,
             LetterData: letterData,
             Version: Constants.EquipmentVersion
@@ -192,6 +193,7 @@ interface Equipment {
     Rarity: number,
     Image: string,
     LetterData: EquipmentLetterData,
+    BuffData: BuffData,
     Version: number,
     Level: number
 }
@@ -203,5 +205,6 @@ interface HeadgearImages {
     Legendary: string[]
 }
 
+type BuffData = { [keys: string]: { [keys: string]: string } };
 type EquipmentLetterData = { [keys: string]: number };
 type HeadgearImageData = { [keys: string]: HeadgearImages };

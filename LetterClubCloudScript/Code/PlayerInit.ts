@@ -66,12 +66,12 @@ class PlayerInit {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                if (playerAvatar.IsPurchased)
-                    baseAvatar.IsPurchased = true;
+                if (playerAvatar.Owned)
+                    baseAvatar.Owned = true;
                 if (playerAvatar.Xp > 0)
                     baseAvatar.Xp = playerAvatar.Xp;
-                if (playerAvatar.Level > 0)
-                    baseAvatar.Xp = playerAvatar.Level;
+                if (playerAvatar.Rank > 0)
+                    baseAvatar.Xp = playerAvatar.Rank;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
@@ -133,6 +133,7 @@ class PlayerInit {
         data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
 
+        log.debug("sending equipment: " + data[Constants.Letters]);
         log.debug("sending avatars: " + data[Constants.Avatars]);
 
         // send the modified values back to the player's internal data
