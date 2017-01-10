@@ -1,20 +1,47 @@
-﻿/// <reference path="./Code/Chests"/>
-/// <reference path="./Code/Constants"/>
-/// <reference path="./Code/PlayerInit"/>
-/// <reference path="./Code/Equipment"/>
-/// <reference path="./Code/Avatars"/>
+﻿/// <reference path="Code/Chests.ts"/>
+/// <reference path="./Code/Constants.ts"/>
+/// <reference path="./Code/PlayerInit.ts"/>
+/// <reference path="./Code/Equipment.ts"/>
+/// <reference path="./Code/Avatars.ts"/>
+
+handlers.AttemptClaimReward = () => {
+    // ensure the player hasn't already claimed their reward this week
+    var key = "hasClaimedRewardThisWeek";
+    var request : GetUserDataRequest = {
+        Keys: [key],
+        PlayFabId: currentPlayerId,
+        IfChangedFromDataVersion: -1
+    };
+    var result = server.GetUserInternalData(request);
+    try {
+        var hasClaimedRewardThisWeek = JSON.parse(result.Data[key].Value) as boolean;
+        if(!hasClaimedRewardThisWeek) {
+            var data = {};
+            data[key] = true;
+            var updateRequest : UpdateUserDataRequest = {
+                Data: data, 
+                PlayFabId: currentPlayerId
+            }
+            server.UpdateUserInternalData(updateRequest);
+        }
+    }
+    catch(e) 
+    {
+
+    }
+}
 
 handlers.pickNewDailyLetters = function(){
   var lettersForThisMonthKey = "DailyLettersForThisMonth";
-  var titleData = server.GetTitleInternalData({keys: [lettersForThisMonthKey]});
-  var lettersForThisMonth = titleData["Data"][lettersForThisMonthKey];
-  lettersForThisMonth = JSON.parse(lettersForThisMonth);
+  var titleData = server.GetTitleInternalData({Keys: [lettersForThisMonthKey]});
+  var lettersForThisMonth = JSON.parse(titleData["Data"][lettersForThisMonthKey]);
+  
   if(lettersForThisMonth.length > 0) {
     var lettersForToday = lettersForThisMonth.pop();
-    server.SetTitleData({key:"DailySaleLetter0", value:lettersForToday[0]});
-    server.SetTitleData({key:"DailySaleLetter1", value:lettersForToday[1]});
-    server.SetTitleData({key:"DailySaleLetter2", value:lettersForToday[2]});
-    server.SetTitleInternalData({key: lettersForThisMonthKey, value:JSON.stringify(lettersForThisMonth)});
+    server.SetTitleData({Key:"DailySaleLetter0", Value:lettersForToday[0]});
+    server.SetTitleData({Key:"DailySaleLetter1", Value:lettersForToday[1]});
+    server.SetTitleData({Key:"DailySaleLetter2", Value:lettersForToday[2]});
+    server.SetTitleInternalData({Key: lettersForThisMonthKey, Value:JSON.stringify(lettersForThisMonth)});
   }
 }
 
@@ -25,7 +52,7 @@ handlers.resetLeaderboard = function(data){
     var contentBody = JSON.stringify({StatisticName: "Game Score"});
     var contentType = "application/json";
     var headers = {"X-SecretKey" : "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G"};
-    var responseString =  http.request(url,method,contentBody,contentType,headers); 
+    var responseString = (http.request as any)(url,method,contentBody,contentType,headers); 
     log.debug(responseString);  
 }
 
@@ -37,10 +64,6 @@ handlers.awardTopPlayers = function() {
     };
     var leaderboard = server.GetLeaderboard(request);
     leaderboard.Leaderboard.forEach(function(e,i) {
-        server.AddPlayerTag({
-            PlayFabId: e.PlayFabId,
-            TagName: "TopPlayerTest"
-        });
     });
 }
 
