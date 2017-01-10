@@ -55,7 +55,7 @@ class PlayerInit {
             log.debug("new letters " + result.Letters);
         }
         
-        var baseAvatars = AvatarData.GetAvatars();
+        var baseAvatars = AvatarData.GetPlayerAvatarInfo();
 
         log.debug("avatar key: " + Constants.Avatars);
         log.debug("   " + internalDataResult.Data[Constants.Avatars]);

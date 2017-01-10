@@ -1,7 +1,824 @@
 ﻿
-class AvatarData {
+class AvatarData
+{
+    public static GetAvatarData(): AvatarDataList
+    {
+        return {
+            alien: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            blue: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            boxer: {
+
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            cat: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            clown: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            cow: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            dinosaur: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            dog: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            dragon: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            fairy: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            frank: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            pirate: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            red: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            robber: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            robot: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            superhero: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            teddy: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            },
+            wizard: {
+                Rarity: 0,
+                RankData: {
+                    0: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    1: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    2: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    3: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    4: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    5: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    6: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    7: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    8: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    },
+                    9: {
+                        LetterData: { a: 1, b: 2, c: 3 },
+                        BuffData: {}
+                    }
+                }
+            }
+        }
+    }
     
-    public static GetAvatars(): AvatarList  {
+    public static GetPlayerAvatarInfo(): AvatarList  {
         return {
             alien: { Owned: false, Xp: 0, Rank: 0 },
             blue: { Owned: true, Xp: 0, Rank: 0 },
@@ -26,12 +843,8 @@ class AvatarData {
 
     public static GetRandomAvatar(rarity: number): AvatarId
     {
-        var dataResult = server.GetTitleData({
-            Keys: ["Avatars"]
-        });
-        
-        var avatarsData = JSON.parse(dataResult.Data["Avatars"]);
-        var avatars = AvatarData.GetAvatars();
+        var avatarsData = AvatarData.GetAvatarData();
+        var avatars = AvatarData.GetPlayerAvatarInfo();
         var pool: AvatarId[] = [];
 
         for (var id in avatars) {
@@ -50,7 +863,7 @@ class AvatarData {
             Keys: [Constants.AvatarRanks, Constants.Avatars]
         });
         var avatarRanks = JSON.parse(titleDataResult.Data[Constants.AvatarRanks]);
-        var avatarsData = JSON.parse(titleDataResult.Data[Constants.Avatars]);
+        var avatarsData = AvatarData.GetAvatarData();
 
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
@@ -92,8 +905,15 @@ interface Avatar {
     Rank: number
 }
 
+type AvatarDataList = { [keys: string]: AvatarData }
 
-type AvatarRanksData = { [keys: string]: AvatarRankData }
+interface AvatarData {
+    Rarity: number,
+    RankData: {[keys: number]: AvatarRankData}
+}
+
+
+type AvatarRanksData = { [keys: string]: AvatarRanksData }
 type AvatarRankData = { LetterData: AvatarLetterData, BuffData: BuffData }
 type AvatarLetterData = { [keys: string]: number };
 

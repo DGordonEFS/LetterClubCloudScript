@@ -73,6 +73,10 @@ handlers.increaseAvatarRank = function (args, context): AvatarList {
     return AvatarData.IncreaseAvatarRank(args);
 }
 
+handlers.getAvatarData = function (args, context): AvatarDataList {
+    return AvatarData.GetAvatarData();
+}
+
 handlers.hash = function (args, context) {
     var str = args.str;
     var hash = 0;
