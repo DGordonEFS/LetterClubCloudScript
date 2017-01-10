@@ -407,6 +407,8 @@ Constants.Sunglasses = 0;
 Constants.XpPerAvatar = 500;
 Constants.Coins = "CO";
 Constants.Gems = "Gems";
+Constants.MostRecentChallengeRewardClaimedId = "most_recent_challenge_reward_claimed";
+Constants.GameScoreStatisticId = "Game Score";
 var PlayerInit = (function () {
     function PlayerInit() {
     }
@@ -763,27 +765,52 @@ var AvatarData = (function () {
     };
     return AvatarData;
 }());
-handlers.AttemptClaimReward = function () {
-    var key = "hasClaimedRewardThisWeek";
-    var request = {
-        Keys: [key],
-        PlayFabId: currentPlayerId,
-        IfChangedFromDataVersion: -1
-    };
-    var result = server.GetUserInternalData(request);
-    try {
-        var hasClaimedRewardThisWeek = JSON.parse(result.Data[key].Value);
-        if (!hasClaimedRewardThisWeek) {
-            var data = {};
-            data[key] = true;
-            var updateRequest = {
-                Data: data,
-                PlayFabId: currentPlayerId
-            };
-            server.UpdateUserInternalData(updateRequest);
-        }
+handlers.checkIfUserQualifiesForChallengeReward = function () {
+    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
+        StatisticName: Constants.GameScoreStatisticId
+    }).StatisticVersions.pop().Version;
+    log.debug(currentLeaderboardVersion.toString());
+    var userData = server.GetUserInternalData({
+        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+        PlayFabId: currentPlayerId
+    }).Data;
+    var mostRecentChallengeRewardClaimed = 0;
+    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
+        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
     }
-    catch (e) {
+    return mostRecentChallengeRewardClaimed < currentLeaderboardVersion;
+};
+handlers.attemptClaimChallengeReward = function () {
+    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
+        StatisticName: Constants.GameScoreStatisticId
+    }).StatisticVersions.pop().Version;
+    log.debug(currentLeaderboardVersion.toString());
+    var userData = server.GetUserInternalData({
+        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+        PlayFabId: currentPlayerId
+    }).Data;
+    var mostRecentChallengeRewardClaimed = 0;
+    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
+        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+    }
+    log.debug(mostRecentChallengeRewardClaimed.toString());
+    if (mostRecentChallengeRewardClaimed < currentLeaderboardVersion) {
+        var data = {};
+        data[Constants.MostRecentChallengeRewardClaimedId] = currentLeaderboardVersion;
+        server.UpdateUserInternalData({
+            Data: data,
+            PlayFabId: currentPlayerId
+        });
+        return {
+            DidClaimSuccessfully: true,
+            Message: "You got a reward!"
+        };
+    }
+    else {
+        return {
+            DidClaimSuccessfully: false,
+            Message: "Reward already claimed"
+        };
     }
 };
 handlers.pickNewDailyLetters = function () {

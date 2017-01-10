@@ -1,69 +1,110 @@
-﻿/// <reference path="Code/Chests.ts"/>
+﻿/// <reference path="./Code/Chests.ts"/>
 /// <reference path="./Code/Constants.ts"/>
 /// <reference path="./Code/PlayerInit.ts"/>
 /// <reference path="./Code/Equipment.ts"/>
 /// <reference path="./Code/Avatars.ts"/>
 
-handlers.AttemptClaimReward = () => {
-    // ensure the player hasn't already claimed their reward this week
-    var key = "hasClaimedRewardThisWeek";
-    var request : GetUserDataRequest = {
-        Keys: [key],
-        PlayFabId: currentPlayerId,
-        IfChangedFromDataVersion: -1
-    };
-    var result = server.GetUserInternalData(request);
-    try {
-        var hasClaimedRewardThisWeek = JSON.parse(result.Data[key].Value) as boolean;
-        if(!hasClaimedRewardThisWeek) {
-            var data = {};
-            data[key] = true;
-            var updateRequest : UpdateUserDataRequest = {
-                Data: data, 
-                PlayFabId: currentPlayerId
-            }
-            server.UpdateUserInternalData(updateRequest);
-        }
-    }
-    catch(e) 
-    {
+handlers.checkIfUserQualifiesForChallengeReward = function (): boolean {
+    // todo: check if the user is qualified for the reward.
+    // currently just making sure that they haven't already received it.
 
+    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
+        StatisticName: Constants.GameScoreStatisticId
+    }).StatisticVersions.pop().Version;
+    log.debug(currentLeaderboardVersion.toString());
+
+    var userData = server.GetUserInternalData({
+        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+        PlayFabId: currentPlayerId
+    }).Data;
+
+    var mostRecentChallengeRewardClaimed = 0;
+    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
+        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+    }
+
+    return mostRecentChallengeRewardClaimed < currentLeaderboardVersion;
+}
+
+interface AttemptClaimChallengeRewardResult {
+    DidClaimSuccessfully: boolean;
+    Message: string;
+}
+
+handlers.attemptClaimChallengeReward = function (): AttemptClaimChallengeRewardResult {
+    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
+        StatisticName: Constants.GameScoreStatisticId
+    }).StatisticVersions.pop().Version;
+    log.debug(currentLeaderboardVersion.toString());
+
+    var userData = server.GetUserInternalData({
+        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+        PlayFabId: currentPlayerId
+    }).Data;
+
+    var mostRecentChallengeRewardClaimed = 0;
+    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
+        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+    }
+
+    log.debug(mostRecentChallengeRewardClaimed.toString());
+
+    // if user hasn't claimed reward for this week yet.
+    if (mostRecentChallengeRewardClaimed < currentLeaderboardVersion) {
+
+        // todo: grant the reward here
+
+        var data = {};
+        data[Constants.MostRecentChallengeRewardClaimedId] = currentLeaderboardVersion;
+        server.UpdateUserInternalData({
+            Data: data,
+            PlayFabId: currentPlayerId
+        });
+        return {
+            DidClaimSuccessfully: true,
+            Message: "You got a reward!"
+        };
+    } else {
+        return {
+            DidClaimSuccessfully: false,
+            Message: "Reward already claimed"
+        };
     }
 }
 
-handlers.pickNewDailyLetters = function(){
-  var lettersForThisMonthKey = "DailyLettersForThisMonth";
-  var titleData = server.GetTitleInternalData({Keys: [lettersForThisMonthKey]});
-  var lettersForThisMonth = JSON.parse(titleData["Data"][lettersForThisMonthKey]);
-  
-  if(lettersForThisMonth.length > 0) {
-    var lettersForToday = lettersForThisMonth.pop();
-    server.SetTitleData({Key:"DailySaleLetter0", Value:lettersForToday[0]});
-    server.SetTitleData({Key:"DailySaleLetter1", Value:lettersForToday[1]});
-    server.SetTitleData({Key:"DailySaleLetter2", Value:lettersForToday[2]});
-    server.SetTitleInternalData({Key: lettersForThisMonthKey, Value:JSON.stringify(lettersForThisMonth)});
-  }
+handlers.pickNewDailyLetters = () => {
+    var lettersForThisMonthKey = "DailyLettersForThisMonth";
+    var titleData = server.GetTitleInternalData({ Keys: [lettersForThisMonthKey] });
+    var lettersForThisMonth = JSON.parse(titleData["Data"][lettersForThisMonthKey]);
+
+    if (lettersForThisMonth.length > 0) {
+        var lettersForToday = lettersForThisMonth.pop();
+        server.SetTitleData({ Key: "DailySaleLetter0", Value: lettersForToday[0] });
+        server.SetTitleData({ Key: "DailySaleLetter1", Value: lettersForToday[1] });
+        server.SetTitleData({ Key: "DailySaleLetter2", Value: lettersForToday[2] });
+        server.SetTitleInternalData({ Key: lettersForThisMonthKey, Value: JSON.stringify(lettersForThisMonth) });
+    }
 }
 
-handlers.resetLeaderboard = function(data){
+handlers.resetLeaderboard = data => {
     handlers.awardTopPlayers();
     var url = "https://53BC.playfabapi.com/admin/IncrementPlayerStatisticVersion";
     var method = "post";
-    var contentBody = JSON.stringify({StatisticName: "Game Score"});
+    var contentBody = JSON.stringify({ StatisticName: "Game Score" });
     var contentType = "application/json";
-    var headers = {"X-SecretKey" : "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G"};
-    var responseString = (http.request as any)(url,method,contentBody,contentType,headers); 
-    log.debug(responseString);  
+    var headers = { "X-SecretKey": "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G" };
+    var responseString = (http.request as any)(url, method, contentBody, contentType, headers);
+    log.debug(responseString);
 }
 
-handlers.awardTopPlayers = function() {
+handlers.awardTopPlayers = function () {
     var request = {
         StatisticName: "Game Score",
         MaxResultsCount: 10,
         StartPosition: 0
     };
     var leaderboard = server.GetLeaderboard(request);
-    leaderboard.Leaderboard.forEach(function(e,i) {
+    leaderboard.Leaderboard.forEach(function (e, i) {
     });
 }
 
@@ -171,7 +212,7 @@ interface PurchaseRandomAvatarResult {
     },
     PurchasedAvatarId: string,
     Success: boolean,
-    Message:string
+    Message: string
 };
 
 
