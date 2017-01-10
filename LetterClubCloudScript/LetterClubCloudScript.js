@@ -1537,6 +1537,162 @@ var AvatarData = (function () {
             }
         };
     };
+    AvatarData.GetAvatarRankMetaData = function () {
+        return {
+            0: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            1: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            2: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            3: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            }
+        };
+    };
     AvatarData.GetPlayerAvatarInfo = function () {
         return {
             alien: { Owned: false, Xp: 0, Rank: 0 },
@@ -1666,6 +1822,9 @@ handlers.increaseAvatarRank = function (args, context) {
 };
 handlers.getAvatarData = function (args, context) {
     return AvatarData.GetAvatarData();
+};
+handlers.getAvatarRankMetaData = function (args, context) {
+    return AvatarData.GetAvatarRankMetaData();
 };
 handlers.hash = function (args, context) {
     var str = args.str;

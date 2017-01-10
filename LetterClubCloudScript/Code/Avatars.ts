@@ -817,7 +817,164 @@ class AvatarData
             }
         }
     }
-    
+
+    public static GetAvatarRankMetaData(): AvatarRankMetaData {
+        return {
+            0: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            1: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            2: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            },
+            3: {
+                0: {
+                    Xp: 1000,
+                    Cost: 50
+                },
+                1: {
+                    Xp: 2000,
+                    Cost: 200
+                },
+                2: {
+                    Xp: 5000,
+                    Cost: 500
+                },
+                3: {
+                    Xp: 10000,
+                    Cost: 1000
+                },
+                4: {
+                    Xp: 20000,
+                    Cost: 2000
+                },
+                5: {
+                    Xp: 40000,
+                    Cost: 4000
+                },
+                6: {
+                    Xp: 100000,
+                    Cost: 10000
+                },
+                7: {
+                    Xp: 200000,
+                    Cost: 20000
+                },
+                8: {
+                    Xp: 400000,
+                    Cost: 40000
+                }
+            }
+        }
+    }
+
     public static GetPlayerAvatarInfo(): AvatarList  {
         return {
             alien: { Owned: false, Xp: 0, Rank: 0 },
@@ -923,3 +1080,8 @@ interface AvatarRank {
 }
 
 type AvatarId = { Id: string, Avatar: Avatar }
+type AvatarRankMetaData = {
+    [keys: number]: {
+        [keys: number]: AvatarRank
+    }
+}

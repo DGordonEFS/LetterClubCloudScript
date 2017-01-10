@@ -77,6 +77,10 @@ handlers.getAvatarData = function (args, context): AvatarDataList {
     return AvatarData.GetAvatarData();
 }
 
+handlers.getAvatarRankMetaData = function (args, context): AvatarRankMetaData {
+    return AvatarData.GetAvatarRankMetaData();
+}
+
 handlers.hash = function (args, context) {
     var str = args.str;
     var hash = 0;
