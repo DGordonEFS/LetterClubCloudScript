@@ -407,7 +407,7 @@ Constants.Sunglasses = 0;
 Constants.XpPerAvatar = 500;
 Constants.Coins = "CO";
 Constants.Gems = "Gems";
-Constants.MostRecentChallengeRewardClaimedId = "most_recent_challenge_reward_claimed";
+Constants.ChallengeData = "challenge_data";
 Constants.GameScoreStatisticId = "Game Score";
 var PlayerInit = (function () {
     function PlayerInit() {
@@ -765,53 +765,100 @@ var AvatarData = (function () {
     };
     return AvatarData;
 }());
-handlers.checkIfUserQualifiesForChallengeReward = function () {
-    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
-        StatisticName: Constants.GameScoreStatisticId
-    }).StatisticVersions.pop().Version;
-    log.debug(currentLeaderboardVersion.toString());
-    var userData = server.GetUserInternalData({
-        Keys: [Constants.MostRecentChallengeRewardClaimedId],
-        PlayFabId: currentPlayerId
-    }).Data;
-    var mostRecentChallengeRewardClaimed = 0;
-    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
-        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+handlers.grantChallengeRewardToPlayer = function () {
+    var challengeDataRecord = server.GetUserData({
+        PlayFabId: currentPlayerId,
+        Keys: [Constants.ChallengeData]
+    }).Data[Constants.ChallengeData];
+    var challengeData;
+    if (challengeDataRecord) {
+        challengeData = JSON.parse(challengeDataRecord.Value);
+        if (challengeData.BypassNextTaskSweep) {
+            delete challengeData.BypassNextTaskSweep;
+        }
+        else {
+            challengeData.HasUnclaimedPrize = true;
+        }
     }
-    return mostRecentChallengeRewardClaimed < currentLeaderboardVersion;
+    else {
+        challengeData = {
+            HasUnclaimedPrize: true
+        };
+    }
+    var data = {};
+    data[Constants.ChallengeData] = JSON.stringify(challengeData);
+    server.UpdateUserData({
+        PlayFabId: currentPlayerId,
+        Data: data
+    });
 };
-handlers.attemptClaimChallengeReward = function () {
-    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
-        StatisticName: Constants.GameScoreStatisticId
-    }).StatisticVersions.pop().Version;
-    log.debug(currentLeaderboardVersion.toString());
-    var userData = server.GetUserInternalData({
-        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+handlers.checkIfUserQualifiesForChallengeReward = function () {
+    var challengeDataRecord = server.GetUserData({
+        Keys: [Constants.ChallengeData],
         PlayFabId: currentPlayerId
-    }).Data;
-    var mostRecentChallengeRewardClaimed = 0;
-    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
-        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+    }).Data[Constants.ChallengeData];
+    var leaderboard = server.GetLeaderboardAroundUser({
+        PlayFabId: currentPlayerId,
+        StatisticName: Constants.GameScoreStatisticId,
+        MaxResultsCount: 1
+    });
+    var qualifies = (leaderboard.Leaderboard[0]) && leaderboard.Leaderboard[0].Position < 500;
+    var challengeData;
+    if (!challengeDataRecord) {
+        return qualifies;
     }
-    log.debug(mostRecentChallengeRewardClaimed.toString());
-    if (mostRecentChallengeRewardClaimed < currentLeaderboardVersion) {
-        var data = {};
-        data[Constants.MostRecentChallengeRewardClaimedId] = currentLeaderboardVersion;
-        server.UpdateUserInternalData({
-            Data: data,
-            PlayFabId: currentPlayerId
-        });
-        return {
-            DidClaimSuccessfully: true,
-            Message: "You got a reward!"
+    else {
+        challengeData = JSON.parse(challengeDataRecord.Value);
+    }
+    log.debug(JSON.stringify(leaderboard));
+    return challengeData.HasUnclaimedPrize;
+};
+handlers.claimChallengeReward = function () {
+    var challengeDataRecord = server.GetUserData({
+        Keys: [Constants.ChallengeData],
+        PlayFabId: currentPlayerId
+    }).Data[Constants.ChallengeData];
+    var challengeData;
+    if (!challengeDataRecord) {
+        challengeData = {
+            HasUnclaimedPrize: false
         };
     }
     else {
+        challengeData = JSON.parse(challengeDataRecord.Value);
+    }
+    function grantPrize() { log.debug("you got a prize!"); }
+    ;
+    function writeChallengeData(challengeData) {
+        var data = {};
+        data[Constants.ChallengeData] = JSON.stringify(challengeData);
+        var result = server.UpdateUserData({
+            PlayFabId: currentPlayerId,
+            Data: data
+        });
+    }
+    ;
+    if (challengeData.HasUnclaimedPrize) {
+        grantPrize();
+        log.debug("has unclaimed prize");
+        challengeData.HasUnclaimedPrize = false;
+        writeChallengeData(challengeData);
         return {
-            DidClaimSuccessfully: false,
-            Message: "Reward already claimed"
+            DidClaimSuccessfully: true
         };
     }
+    if (!challengeData.BypassNextTaskSweep) {
+        grantPrize();
+        log.debug("bypass sweep");
+        challengeData.BypassNextTaskSweep = true;
+        writeChallengeData(challengeData);
+        return {
+            DidClaimSuccessfully: true
+        };
+    }
+    return {
+        DidClaimSuccessfully: false
+    };
 };
 handlers.pickNewDailyLetters = function () {
     var lettersForThisMonthKey = "DailyLettersForThisMonth";
@@ -826,7 +873,6 @@ handlers.pickNewDailyLetters = function () {
     }
 };
 handlers.resetLeaderboard = function (data) {
-    handlers.awardTopPlayers();
     var url = "https://53BC.playfabapi.com/admin/IncrementPlayerStatisticVersion";
     var method = "post";
     var contentBody = JSON.stringify({ StatisticName: "Game Score" });
@@ -834,16 +880,6 @@ handlers.resetLeaderboard = function (data) {
     var headers = { "X-SecretKey": "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G" };
     var responseString = http.request(url, method, contentBody, contentType, headers);
     log.debug(responseString);
-};
-handlers.awardTopPlayers = function () {
-    var request = {
-        StatisticName: "Game Score",
-        MaxResultsCount: 10,
-        StartPosition: 0
-    };
-    var leaderboard = server.GetLeaderboard(request);
-    leaderboard.Leaderboard.forEach(function (e, i) {
-    });
 };
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);

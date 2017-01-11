@@ -4,72 +4,135 @@
 /// <reference path="./Code/Equipment.ts"/>
 /// <reference path="./Code/Avatars.ts"/>
 
+interface IChallengeData {
+    HasUnclaimedPrize: boolean;
+    BypassNextTaskSweep?: boolean;
+}
+
+// called by a task
+handlers.grantChallengeRewardToPlayer = () => {
+    var challengeDataRecord = server.GetUserData({
+        PlayFabId: currentPlayerId,
+        Keys: [Constants.ChallengeData]
+    }).Data[Constants.ChallengeData];
+
+    var challengeData: IChallengeData;
+
+    if (challengeDataRecord) {
+        challengeData = JSON.parse(challengeDataRecord.Value);
+        if (challengeData.BypassNextTaskSweep) {
+            delete challengeData.BypassNextTaskSweep;
+        } else {
+            challengeData.HasUnclaimedPrize = true;
+        }
+    } else {
+        challengeData = {
+            HasUnclaimedPrize: true
+        }
+    }
+
+    var data = {};
+    data[Constants.ChallengeData] = JSON.stringify(challengeData);
+
+    server.UpdateUserData({
+        PlayFabId: currentPlayerId,
+        Data: data
+    });
+}
+
 handlers.checkIfUserQualifiesForChallengeReward = function (): boolean {
-    // todo: check if the user is qualified for the reward.
-    // currently just making sure that they haven't already received it.
-
-    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
-        StatisticName: Constants.GameScoreStatisticId
-    }).StatisticVersions.pop().Version;
-    log.debug(currentLeaderboardVersion.toString());
-
-    var userData = server.GetUserInternalData({
-        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+    var challengeDataRecord = server.GetUserData({
+        Keys: [Constants.ChallengeData],
         PlayFabId: currentPlayerId
-    }).Data;
+    }).Data[Constants.ChallengeData];
 
-    var mostRecentChallengeRewardClaimed = 0;
-    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
-        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
+    var leaderboard = server.GetLeaderboardAroundUser({
+        PlayFabId: currentPlayerId,
+        StatisticName: Constants.GameScoreStatisticId,
+        MaxResultsCount: 1
+    });
+
+    // todo: figure out the real conditions for whether a player qualifies for a reward.
+    var qualifies = (leaderboard.Leaderboard[0]) && leaderboard.Leaderboard[0].Position < 500;
+
+    var challengeData: IChallengeData;
+
+    if (!challengeDataRecord) {
+        return qualifies;
+    }
+    else {
+        challengeData = JSON.parse(challengeDataRecord.Value);
     }
 
-    return mostRecentChallengeRewardClaimed < currentLeaderboardVersion;
+    log.debug(JSON.stringify(leaderboard));
+    return challengeData.HasUnclaimedPrize;
 }
 
-interface AttemptClaimChallengeRewardResult {
+interface IAttemptClaimChallengeRewardResult {
     DidClaimSuccessfully: boolean;
-    Message: string;
 }
 
-handlers.attemptClaimChallengeReward = function (): AttemptClaimChallengeRewardResult {
-    var currentLeaderboardVersion = server.GetPlayerStatisticVersions({
-        StatisticName: Constants.GameScoreStatisticId
-    }).StatisticVersions.pop().Version;
-    log.debug(currentLeaderboardVersion.toString());
-
-    var userData = server.GetUserInternalData({
-        Keys: [Constants.MostRecentChallengeRewardClaimedId],
+// called by the client. Assuming that checkIfUserQualifiesForChallengeReward was checked already. 
+handlers.claimChallengeReward = function (): IAttemptClaimChallengeRewardResult {
+    var challengeDataRecord = server.GetUserData({
+        Keys: [Constants.ChallengeData],
         PlayFabId: currentPlayerId
-    }).Data;
+    }).Data[Constants.ChallengeData];
 
-    var mostRecentChallengeRewardClaimed = 0;
-    if (userData[Constants.MostRecentChallengeRewardClaimedId]) {
-        mostRecentChallengeRewardClaimed = parseInt(userData[Constants.MostRecentChallengeRewardClaimedId].Value);
-    }
+    var challengeData: IChallengeData;
 
-    log.debug(mostRecentChallengeRewardClaimed.toString());
-
-    // if user hasn't claimed reward for this week yet.
-    if (mostRecentChallengeRewardClaimed < currentLeaderboardVersion) {
-
-        // todo: grant the reward here
-
-        var data = {};
-        data[Constants.MostRecentChallengeRewardClaimedId] = currentLeaderboardVersion;
-        server.UpdateUserInternalData({
-            Data: data,
-            PlayFabId: currentPlayerId
-        });
-        return {
-            DidClaimSuccessfully: true,
-            Message: "You got a reward!"
+    if (!challengeDataRecord) {
+        challengeData = {
+            HasUnclaimedPrize: false
         };
     } else {
+        challengeData = JSON.parse(challengeDataRecord.Value);
+    }
+
+    // if the task has swept through us, HasUnclaimedPrize will be true.
+    // (HasUnclaimedPrize exists mainly so that the app can know on startup if there's a prize available)
+    // if the task hasn't swept through us yet, we might still be able to claim the prize. If we were 
+    // hanging around in the app when the timer expired, the task probably won't have had a chance to run
+    // so to provide a fluid UX, we need to just take the client's word for it.
+    // we can, however, make sure that the client only gets to have one reward per week.
+    // if the client is calling this method and HasUnclaimedPrize is false, we will claim the prize and then set BypassNextTaskSweep to true 
+    // if BypassNextTaskSweep is true, we won't claim the prize (because we've already claimed it)
+    // the next time the task runs, BypassNextTaskSweep will be removed and everything will be restored to normal.
+    // we may then claim another prize... locking us out until the next time the task runs.
+
+    function grantPrize() { log.debug("you got a prize!"); /*todo!*/ };
+    function writeChallengeData(challengeData) {
+        var data = {}
+        data[Constants.ChallengeData] = JSON.stringify(challengeData);
+        var result = server.UpdateUserData({
+            PlayFabId: currentPlayerId,
+            Data: data
+        });
+    };
+
+    if (challengeData.HasUnclaimedPrize) {
+        grantPrize();
+        log.debug("has unclaimed prize");
+        challengeData.HasUnclaimedPrize = false;
+        writeChallengeData(challengeData);
         return {
-            DidClaimSuccessfully: false,
-            Message: "Reward already claimed"
+            DidClaimSuccessfully: true
         };
     }
+
+    if (!challengeData.BypassNextTaskSweep) {
+        grantPrize();
+        log.debug("bypass sweep");
+        challengeData.BypassNextTaskSweep = true;
+        writeChallengeData(challengeData);
+        return {
+            DidClaimSuccessfully: true
+        };
+    }
+
+    return {
+        DidClaimSuccessfully: false
+    };
 }
 
 handlers.pickNewDailyLetters = () => {
@@ -87,7 +150,6 @@ handlers.pickNewDailyLetters = () => {
 }
 
 handlers.resetLeaderboard = data => {
-    handlers.awardTopPlayers();
     var url = "https://53BC.playfabapi.com/admin/IncrementPlayerStatisticVersion";
     var method = "post";
     var contentBody = JSON.stringify({ StatisticName: "Game Score" });
@@ -96,18 +158,6 @@ handlers.resetLeaderboard = data => {
     var responseString = (http.request as any)(url, method, contentBody, contentType, headers);
     log.debug(responseString);
 }
-
-handlers.awardTopPlayers = function () {
-    var request = {
-        StatisticName: "Game Score",
-        MaxResultsCount: 10,
-        StartPosition: 0
-    };
-    var leaderboard = server.GetLeaderboard(request);
-    leaderboard.Leaderboard.forEach(function (e, i) {
-    });
-}
-
 
 handlers.initPlayer = function (args, context) {
     return PlayerInit.InitPlayer(args);

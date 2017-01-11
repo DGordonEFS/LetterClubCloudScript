@@ -15,6 +15,6 @@ class Constants {
     static readonly XpPerAvatar: number = 500;
     static readonly Coins: string = "CO";
     static readonly Gems: string = "Gems";
-    static readonly MostRecentChallengeRewardClaimedId : string = "most_recent_challenge_reward_claimed";
+    static readonly ChallengeData : string = "challenge_data";
     static readonly GameScoreStatisticId : string = "Game Score";
 }
