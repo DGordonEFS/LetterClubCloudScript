@@ -470,7 +470,7 @@ var PlayerInit = (function () {
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
+            Keys: [Constants.Letters, Constants.Avatars]
         });
         if (internalDataResult.Data[Constants.Letters] != null) {
             result.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
@@ -488,22 +488,25 @@ var PlayerInit = (function () {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                if (playerAvatar.Owned)
+                if (playerAvatar.Owned) {
                     baseAvatar.Owned = true;
-                if (playerAvatar.Xp > 0)
                     baseAvatar.Xp = playerAvatar.Xp;
-                if (playerAvatar.Rank > 0)
-                    baseAvatar.Xp = playerAvatar.Rank;
+                    baseAvatar.Rank = playerAvatar.Rank;
+                }
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
         result.Avatars = baseAvatars;
+        /*
         var baseEquipment = PlayerInit.GetBaseEquipment();
+        
         if (internalDataResult.Data[Constants.Equipment] != null) {
             log.debug("has equipment already");
             baseEquipment = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
+            
         }
         result.Inventory = baseEquipment;
+        */
         if (args.IsMigrating) {
             log.debug("migration");
             // add gems
@@ -541,7 +544,7 @@ var PlayerInit = (function () {
         var data = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
-        data[Constants.Equipment] = JSON.stringify(result.Inventory);
+        //data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
         log.debug("sending equipment: " + data[Constants.Letters]);
         log.debug("sending avatars: " + data[Constants.Avatars]);
@@ -730,43 +733,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "35" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "45" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -775,43 +778,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -820,43 +823,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -865,43 +868,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -910,43 +913,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -955,43 +958,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -999,44 +1002,44 @@ var AvatarData = (function () {
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        LetterData: { a: 1 },
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        LetterData: { a: 1, d: 2, f: 3 },
+                        BuffData: { hp: { value: "35" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1045,43 +1048,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1090,43 +1093,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1135,43 +1138,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1180,43 +1183,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1225,43 +1228,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1270,43 +1273,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1315,43 +1318,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1360,43 +1363,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1405,43 +1408,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1450,43 +1453,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -1495,43 +1498,43 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     2: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     3: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     4: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     6: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     7: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     8: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     },
                     9: {
                         LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: {}
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             }
@@ -1727,33 +1730,43 @@ var AvatarData = (function () {
         }
         return pool[Math.floor(Math.random() * pool.length)];
     };
-    AvatarData.IncreaseAvatarRank = function (args) {
-        var titleDataResult = server.GetTitleData({
-            Keys: [Constants.AvatarRanks, Constants.Avatars]
-        });
-        var avatarRanks = JSON.parse(titleDataResult.Data[Constants.AvatarRanks]);
+    AvatarData.IncreaseAvatarRank = function (id) {
+        var result = { Coins: -1, Avatars: null };
+        log.debug("get avatar rank");
+        var avatarRanks = AvatarData.GetAvatarRankMetaData();
+        log.debug("get avatar data");
         var avatarsData = AvatarData.GetAvatarData();
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
             Keys: [Constants.Avatars]
         });
+        log.debug("get avatars");
         var avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
-        var avatar = avatars[args.Id];
-        var rankData = avatarRanks[avatar.Rank];
+        log.debug("get avatar");
+        var avatar = avatars[id];
+        var rankData = avatarRanks[avatarsData[id].Rarity][avatar.Rank];
+        log.debug("rank data");
         var currencyResult = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
             VirtualCurrency: Constants.Coins,
             Amount: rankData.Cost
         });
+        log.debug("purchased");
+        avatar.Xp -= rankData.Xp;
         avatar.Rank++;
+        log.debug("increase rank");
         var data = {};
         data[Constants.Avatars] = JSON.stringify(avatars);
+        log.debug("json");
         // send the modified values back to the player's internal data
         internalDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
             Data: data
         });
-        return avatars;
+        log.debug("complete");
+        result.Coins = currencyResult.Balance;
+        result.Avatars = avatars;
+        return result;
     };
     return AvatarData;
 }());
@@ -1818,7 +1831,7 @@ handlers.purchaseDailyLetter = function (args, context) {
     return purchaseDailyLetter(args);
 };
 handlers.increaseAvatarRank = function (args, context) {
-    return AvatarData.IncreaseAvatarRank(args);
+    return AvatarData.IncreaseAvatarRank(args.Id);
 };
 handlers.getAvatarData = function (args, context) {
     return AvatarData.GetAvatarData();

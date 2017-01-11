@@ -44,7 +44,7 @@ class PlayerInit {
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
+            Keys: [Constants.Letters, Constants.Avatars]
         });
 
         if (internalDataResult.Data[Constants.Letters] != null) {
@@ -66,17 +66,17 @@ class PlayerInit {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                if (playerAvatar.Owned)
+                if (playerAvatar.Owned) {
                     baseAvatar.Owned = true;
-                if (playerAvatar.Xp > 0)
                     baseAvatar.Xp = playerAvatar.Xp;
-                if (playerAvatar.Rank > 0)
-                    baseAvatar.Xp = playerAvatar.Rank;
+                    baseAvatar.Rank = playerAvatar.Rank;
+                }
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
         result.Avatars = baseAvatars;
 
+        /*
         var baseEquipment = PlayerInit.GetBaseEquipment();
         
         if (internalDataResult.Data[Constants.Equipment] != null) {
@@ -85,6 +85,7 @@ class PlayerInit {
             
         }
         result.Inventory = baseEquipment;
+        */
 
         if (args.IsMigrating) {
             log.debug("migration");
@@ -130,7 +131,7 @@ class PlayerInit {
         var data: { [keys: string]: string } = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
-        data[Constants.Equipment] = JSON.stringify(result.Inventory);
+        //data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
 
         log.debug("sending equipment: " + data[Constants.Letters]);

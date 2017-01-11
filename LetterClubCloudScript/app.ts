@@ -69,8 +69,8 @@ handlers.purchaseDailyLetter = function (args, context) {
     return purchaseDailyLetter(args);
 }
 
-handlers.increaseAvatarRank = function (args, context): AvatarList {
-    return AvatarData.IncreaseAvatarRank(args);
+handlers.increaseAvatarRank = function (args, context) {
+    return AvatarData.IncreaseAvatarRank(args.Id);
 }
 
 handlers.getAvatarData = function (args, context): AvatarDataList {
