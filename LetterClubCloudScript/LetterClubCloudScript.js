@@ -203,6 +203,11 @@ var ChestData = (function () {
         var randomHeadGearsRarityWeights = data.RandomHeadGearsRarityWeights;
         var specificItems = data.SpecificItems;
         var randomItemRarityWeightTotal = randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1] + randomHeadGearsRarityWeights[2] + randomHeadGearsRarityWeights[3];
+        var userDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: ["profile"]
+        });
+        var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
         log.debug("purchaseChest()");
         var chestResult = {
             Success: false,
@@ -328,6 +333,24 @@ var ChestData = (function () {
         log.debug("uniqueEquipment: " + uniqueEquipmentId);
         if (uniqueEquipmentId == null)
             uniqueEquipmentId = 0;
+        var maxEquipment = 24 - randomHeadGears;
+        var overflow = chestResult.Inventory.length - maxEquipment;
+        for (var i = 0; i < overflow; i++) {
+            var lowestPower = 999999;
+            var lowestIndex = 0;
+            // get the worst equipment and junk it.
+            for (var i = 0; i < chestResult.Inventory.length; i++) {
+                var equipment = chestResult.Inventory[i];
+                if (equipment.Id == userProfile.SunglassesId || equipment.Locked)
+                    continue;
+                var power = equipment.Level + equipment.Rarity;
+                if (power < lowestPower) {
+                    lowestPower = power;
+                    lowestIndex = i;
+                }
+            }
+            chestResult.Inventory.splice(i, 1);
+        }
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
             var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
@@ -470,7 +493,7 @@ var PlayerInit = (function () {
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
         });
         if (internalDataResult.Data[Constants.Letters] != null) {
             result.Letters = JSON.parse(internalDataResult.Data[Constants.Letters].Value);
@@ -497,16 +520,12 @@ var PlayerInit = (function () {
             }
         }
         result.Avatars = baseAvatars;
-        /*
         var baseEquipment = PlayerInit.GetBaseEquipment();
-        
         if (internalDataResult.Data[Constants.Equipment] != null) {
             log.debug("has equipment already");
             baseEquipment = JSON.parse(internalDataResult.Data[Constants.Equipment].Value);
-            
         }
         result.Inventory = baseEquipment;
-        */
         if (args.IsMigrating) {
             log.debug("migration");
             // add gems
@@ -544,7 +563,7 @@ var PlayerInit = (function () {
         var data = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
-        //data[Constants.Equipment] = JSON.stringify(result.Inventory);
+        data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
         log.debug("sending equipment: " + data[Constants.Letters]);
         log.debug("sending avatars: " + data[Constants.Avatars]);
@@ -628,7 +647,8 @@ var EquipmentData = (function () {
             BuffData: {},
             Image: headgearImage,
             LetterData: letterData,
-            Version: Constants.EquipmentVersion
+            Version: Constants.EquipmentVersion,
+            Locked: false
         };
         log.debug("equipment: " + equipment);
         return equipment;

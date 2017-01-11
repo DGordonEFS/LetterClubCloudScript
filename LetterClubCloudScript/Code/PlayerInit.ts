@@ -44,7 +44,7 @@ class PlayerInit {
         // get the user's letter values
         var internalDataResult = server.GetUserInternalData({
             PlayFabId: currentPlayerId,
-            Keys: [Constants.Letters, Constants.Avatars]
+            Keys: [Constants.Letters, Constants.Avatars, Constants.Equipment]
         });
 
         if (internalDataResult.Data[Constants.Letters] != null) {
@@ -76,7 +76,7 @@ class PlayerInit {
         }
         result.Avatars = baseAvatars;
 
-        /*
+        
         var baseEquipment = PlayerInit.GetBaseEquipment();
         
         if (internalDataResult.Data[Constants.Equipment] != null) {
@@ -85,7 +85,7 @@ class PlayerInit {
             
         }
         result.Inventory = baseEquipment;
-        */
+        
 
         if (args.IsMigrating) {
             log.debug("migration");
@@ -131,7 +131,7 @@ class PlayerInit {
         var data: { [keys: string]: string } = {};
         data[Constants.Letters] = JSON.stringify(result.Letters);
         data[Constants.Avatars] = JSON.stringify(result.Avatars);
-        //data[Constants.Equipment] = JSON.stringify(result.Inventory);
+        data[Constants.Equipment] = JSON.stringify(result.Inventory);
         data[Constants.Migration] = JSON.stringify(result.Migration);
 
         log.debug("sending equipment: " + data[Constants.Letters]);

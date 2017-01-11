@@ -246,6 +246,12 @@ class ChestData
 
         var randomItemRarityWeightTotal = randomHeadGearsRarityWeights[0] + randomHeadGearsRarityWeights[1] + randomHeadGearsRarityWeights[2] + randomHeadGearsRarityWeights[3];
 
+        var userDataResult = server.GetUserData({
+            PlayFabId: currentPlayerId,
+            Keys: ["profile"]
+        });
+
+        var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
         
         log.debug("purchaseChest()");
         var chestResult: ChestResult = {
@@ -400,6 +406,30 @@ class ChestData
         if (uniqueEquipmentId == null)
             uniqueEquipmentId = 0;
 
+        var maxEquipment = 24 - randomHeadGears;
+        var overflow = chestResult.Inventory.length - maxEquipment;
+        for (var i = 0; i < overflow; i++)
+        {
+            var lowestPower: number = 999999;
+            var lowestIndex: number = 0;
+            // get the worst equipment and junk it.
+            for (var i = 0; i < chestResult.Inventory.length; i++) {
+                var equipment: Equipment = chestResult.Inventory[i];
+
+                if (equipment.Id == userProfile.SunglassesId || equipment.Locked)
+                    continue;
+
+                var power = equipment.Level + equipment.Rarity;
+
+                if (power < lowestPower) {
+                    lowestPower = power;
+                    lowestIndex = i;
+                }
+            }
+
+            chestResult.Inventory.splice(i, 1);
+        }
+
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
             var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
@@ -428,6 +458,8 @@ class ChestData
             chestResult.Inventory.push(equipment);
         }
 
+
+        
         
         chestResult.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
         

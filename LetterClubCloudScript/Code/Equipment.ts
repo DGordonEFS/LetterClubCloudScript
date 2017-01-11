@@ -160,7 +160,8 @@ class EquipmentData {
             BuffData: {},
             Image: headgearImage,
             LetterData: letterData,
-            Version: Constants.EquipmentVersion
+            Version: Constants.EquipmentVersion,
+            Locked: false
         };
 
         log.debug("equipment: " + equipment);
@@ -195,7 +196,8 @@ interface Equipment {
     LetterData: EquipmentLetterData,
     BuffData: BuffData,
     Version: number,
-    Level: number
+    Level: number,
+    Locked:Boolean
 }
 
 interface HeadgearImages {
