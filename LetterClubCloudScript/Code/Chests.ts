@@ -67,7 +67,7 @@ class ChestData
             UniqueLetters: 6,
             LetterTiers: [5, 9, 4, 0],
             SpecificLetters: [],
-            RandomHeadGears: 2,
+            RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,

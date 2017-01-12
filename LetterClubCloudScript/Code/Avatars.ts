@@ -8,44 +8,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 1, e: 0, o: 0 },
+                        BuffData: { hp: { value: "-5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "35" } }
+                        LetterData: { a: 1, e: 1, o: 0 },
+                        BuffData: { hp: { value: "-10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "45" } }
+                        LetterData: { a: 1, e: 1, o: 0 },
+                        BuffData: { hp: { value: "-15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 1, e: 1, o: 1 },
+                        BuffData: { hp: { value: "-20" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 2, e: 2, o: 1 },
+                        BuffData: { hp: { value: "-25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 2, e: 2, o: 2 },
+                        BuffData: { hp: { value: "-30" } }
                     }
                 }
             },
@@ -53,43 +37,27 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { y: 0 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { y: 1 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { y: 1 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { y: 2 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { y: 2 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { y: 3 },
                         BuffData: { hp: { value: "25" } }
                     }
                 }
@@ -99,44 +67,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { p: 0, k: 0 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { p: 1, k: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { p: 1, k: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { p: 2, k: 1 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { p: 2, k: 2 },
                         BuffData: { hp: { value: "25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { p: 3, k: 4 },
+                        BuffData: { hp: { value: "35" } }
                     }
                 }
             },
@@ -144,44 +96,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: -1, c: 1 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: -2, c: 2 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: -3, c: 3 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: -4, c: 4 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { d: -5, c: 5 },
                         BuffData: { hp: { value: "25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: -6, c: 6 },
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },
@@ -189,44 +125,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 0, h: 0 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 0, h: 1 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 1, h: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 1, h: 2 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { a: 1, h: 3 },
                         BuffData: { hp: { value: "25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: 2, h: 4 },
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },
@@ -234,44 +154,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { m: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { m: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { m: 1 },
                         BuffData: { hp: { value: "25" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { m: 2 },
+                        BuffData: { hp: { value: "35" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { m: 3 },
+                        BuffData: { hp: { value: "50" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { m: 4 },
+                        BuffData: { hp: { value: "70" } }
                     }
                 }
             },
@@ -279,44 +183,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { t: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, d: 2, f: 3 },
-                        BuffData: { hp: { value: "35" } }
+                        LetterData: { t: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { t: 1 },
                         BuffData: { hp: { value: "25" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { t: 2 },
+                        BuffData: { hp: { value: "35" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { t: 2 },
+                        BuffData: { hp: { value: "50" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { t: 3 },
+                        BuffData: { hp: { value: "70" } }
                     }
                 }
             },
@@ -324,44 +212,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: 1, c: -1 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: 2, c: -2 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: 3, c: -3 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: 4, c: -4 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { d: 5, c: -5 },
                         BuffData: { hp: { value: "25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { d: 6, c: -6 },
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },
@@ -369,44 +241,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { f: 1, r: 1 },
-                        BuffData: { hp: { value: "20" } }
+                        LetterData: { f: 0, i: 0, r: 1, e: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 1, i: 0, r: 1, e: 0 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 1, i: 1, r: 1, e: 1 },
+                        BuffData: { hp: { value: "30" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 2, i: 1, r: 2, e: 1 },
+                        BuffData: { hp: { value: "40" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 2, i: 2, r: 2, e: 2 },
+                        BuffData: { hp: { value: "50" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 3, i: 3, r: 3, e: 3 },
+                        BuffData: { hp: { value: "60" } }
                     }
                 }
             },
@@ -414,44 +270,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 1, g: 0, n: 0 },
+                        BuffData: { hp: { value: "-5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 1, g: 1, n: 0 },
+                        BuffData: { hp: { value: "-10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 1, g: 2, n: 1 },
+                        BuffData: { hp: { value: "-15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 2, g: 2, n: 1 },
+                        BuffData: { hp: { value: "-25" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 2, g: 3, n: 1 },
+                        BuffData: { hp: { value: "-35" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { l: 2, g: 4, n: 2 },
+                        BuffData: { hp: { value: "-40" } }
                     }
                 }
             },
@@ -459,44 +299,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: {},
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: {},
+                        BuffData: { hp: { value: "15" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: {},
                         BuffData: { hp: { value: "25" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: {},
+                        BuffData: { hp: { value: "40" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: {},
+                        BuffData: { hp: { value: "60" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: {},
+                        BuffData: { hp: { value: "90" } }
                     }
                 }
             },
@@ -504,44 +328,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 1 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 1 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 2 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 2 },
+                        BuffData: { hp: { value: "30" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 2 },
+                        BuffData: { hp: { value: "50" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { r: 3 },
+                        BuffData: { hp: { value: "50" } }
                     }
                 }
             },
@@ -549,43 +357,27 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { x: 0 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { x: 1 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { x: 1 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { x: 2 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { x: 3 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { x: 4 },
                         BuffData: { hp: { value: "25" } }
                     }
                 }
@@ -594,44 +386,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: -1, b: 1, d: 1 },
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: -1, b: 1, d: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: -1, b: 2, d: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { a: -1, b: 2, d: 1 },
                         BuffData: { hp: { value: "25" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { a: -1, b: 2, d: 2 },
                         BuffData: { hp: { value: "25" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { a: -1, b: 3, d: 3 },
+                        BuffData: { hp: { value: "35" } }
                     }
                 }
             },
@@ -639,44 +415,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 1 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 2 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 4 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 6 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 8 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { q: 11 },
+                        BuffData: { hp: { value: "0" } }
                     }
                 }
             },
@@ -684,44 +444,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 0, u: 0, p: 1 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 0, u: 1, p: 1 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 1, u: 1, p: 1 },
+                        BuffData: { hp: { value: "30" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 1, u: 1, p: 2 },
+                        BuffData: { hp: { value: "30" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 1, u: 1, p: 3 },
+                        BuffData: { hp: { value: "40" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { s: 1, u: 2, p: 3 },
+                        BuffData: { hp: { value: "50" } }
                     }
                 }
             },
@@ -729,44 +473,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { b: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { b: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
+                        LetterData: { b: 1 },
                         BuffData: { hp: { value: "25" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { b: 2 },
+                        BuffData: { hp: { value: "35" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { b: 3 },
+                        BuffData: { hp: { value: "50" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { b: 4 },
+                        BuffData: { hp: { value: "70" } }
                     }
                 }
             },
@@ -774,44 +502,28 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 1, i: 0, z: 0 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 1, i: 0, z: 1 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     2: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 1, i: 1, z: 1 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     3: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 2, i: 1, z: 2 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     4: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 3, i: 1, z: 3 },
+                        BuffData: { hp: { value: "0" } }
                     },
                     5: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    6: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    7: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    8: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
-                    },
-                    9: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { w: 4, i: 2, z: 4 },
+                        BuffData: { hp: { value: "0" } }
                     }
                 }
             }
@@ -972,8 +684,8 @@ class AvatarData
                     Cost: 40000
                 }
             }
-        }
-    }
+        };
+    };
 
     public static GetPlayerAvatarInfo(): AvatarList  {
         return {
