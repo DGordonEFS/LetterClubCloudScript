@@ -66,8 +66,8 @@ class PlayerInit {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                if (playerAvatar.Owned) {
-                    baseAvatar.Owned = true;
+                if (playerAvatar.IsPurchased) {
+                    baseAvatar.IsPurchased = true;
                     baseAvatar.Xp = playerAvatar.Xp;
                     baseAvatar.Rank = playerAvatar.Rank;
                 }

@@ -408,13 +408,14 @@ class ChestData
 
         var maxEquipment = 24 - randomHeadGears;
         var overflow = chestResult.Inventory.length - maxEquipment;
+        log.debug("overflow: " + chestResult.Inventory.length + ", " + overflow);
         for (var i = 0; i < overflow; i++)
         {
             var lowestPower: number = 999999;
             var lowestIndex: number = 0;
             // get the worst equipment and junk it.
-            for (var i = 0; i < chestResult.Inventory.length; i++) {
-                var equipment: Equipment = chestResult.Inventory[i];
+            for (var j = 0; j < chestResult.Inventory.length; j++) {
+                var equipment: Equipment = chestResult.Inventory[j];
 
                 if (equipment.Id == userProfile.SunglassesId || equipment.Locked)
                     continue;
@@ -423,12 +424,15 @@ class ChestData
 
                 if (power < lowestPower) {
                     lowestPower = power;
-                    lowestIndex = i;
+                    lowestIndex = j;
                 }
             }
 
-            chestResult.Inventory.splice(i, 1);
+            log.debug("remove item at: " + lowestIndex);
+            chestResult.Inventory.splice(lowestIndex, 1);
         }
+
+        log.debug("num items after overflow: " + chestResult.Inventory.length);
 
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
@@ -483,8 +487,8 @@ class ChestData
             var avatar = AvatarData.GetRandomAvatar(rarity);
             
             chestResult.AvatarsAdded.push(avatar.Id);
-            if (!chestResult.Avatars[avatar.Id].Owned)
-                chestResult.Avatars[avatar.Id].Owned = true;
+            if (!chestResult.Avatars[avatar.Id].IsPurchased)
+                chestResult.Avatars[avatar.Id].IsPurchased = true;
             else
                 chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
         }
@@ -494,8 +498,8 @@ class ChestData
 
             chestResult.AvatarsAdded.push(avatarId);
 
-            if (!chestResult.Avatars[avatarId].Owned)
-                chestResult.Avatars[avatarId].Owned = true;
+            if (!chestResult.Avatars[avatarId].IsPurchased)
+                chestResult.Avatars[avatarId].IsPurchased = true;
             else
                 chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
         }

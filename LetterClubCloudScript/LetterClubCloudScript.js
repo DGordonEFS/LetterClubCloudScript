@@ -335,22 +335,25 @@ var ChestData = (function () {
             uniqueEquipmentId = 0;
         var maxEquipment = 24 - randomHeadGears;
         var overflow = chestResult.Inventory.length - maxEquipment;
+        log.debug("overflow: " + chestResult.Inventory.length + ", " + overflow);
         for (var i = 0; i < overflow; i++) {
             var lowestPower = 999999;
             var lowestIndex = 0;
             // get the worst equipment and junk it.
-            for (var i = 0; i < chestResult.Inventory.length; i++) {
-                var equipment = chestResult.Inventory[i];
+            for (var j = 0; j < chestResult.Inventory.length; j++) {
+                var equipment = chestResult.Inventory[j];
                 if (equipment.Id == userProfile.SunglassesId || equipment.Locked)
                     continue;
                 var power = equipment.Level + equipment.Rarity;
                 if (power < lowestPower) {
                     lowestPower = power;
-                    lowestIndex = i;
+                    lowestIndex = j;
                 }
             }
-            chestResult.Inventory.splice(i, 1);
+            log.debug("remove item at: " + lowestIndex);
+            chestResult.Inventory.splice(lowestIndex, 1);
         }
+        log.debug("num items after overflow: " + chestResult.Inventory.length);
         for (var i = 0; i < randomHeadGears; i++) {
             log.debug("   - create random headgear");
             var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
@@ -386,16 +389,16 @@ var ChestData = (function () {
             log.debug("rarity: " + rarity);
             var avatar = AvatarData.GetRandomAvatar(rarity);
             chestResult.AvatarsAdded.push(avatar.Id);
-            if (!chestResult.Avatars[avatar.Id].Owned)
-                chestResult.Avatars[avatar.Id].Owned = true;
+            if (!chestResult.Avatars[avatar.Id].IsPurchased)
+                chestResult.Avatars[avatar.Id].IsPurchased = true;
             else
                 chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
         }
         for (var i = 0; i < data.SpecificAvatars.length; i++) {
             var avatarId = data.SpecificAvatars[i];
             chestResult.AvatarsAdded.push(avatarId);
-            if (!chestResult.Avatars[avatarId].Owned)
-                chestResult.Avatars[avatarId].Owned = true;
+            if (!chestResult.Avatars[avatarId].IsPurchased)
+                chestResult.Avatars[avatarId].IsPurchased = true;
             else
                 chestResult.Avatars[avatarId].Xp += Constants.XpPerAvatar;
         }
@@ -434,7 +437,7 @@ var Constants = (function () {
     function Constants() {
     }
     Constants.Letters = "letters";
-    Constants.Avatars = "Avatars";
+    Constants.Avatars = "avatars";
     Constants.Equipment = "equipment";
     Constants.UniqueEquipment = "unique_equipment";
     Constants.Migration = "migration";
@@ -511,8 +514,8 @@ var PlayerInit = (function () {
             for (var key in playerAvatarData) {
                 var playerAvatar = playerAvatarData[key];
                 var baseAvatar = baseAvatars[key];
-                if (playerAvatar.Owned) {
-                    baseAvatar.Owned = true;
+                if (playerAvatar.IsPurchased) {
+                    baseAvatar.IsPurchased = true;
                     baseAvatar.Xp = playerAvatar.Xp;
                     baseAvatar.Rank = playerAvatar.Rank;
                 }
@@ -670,22 +673,22 @@ var EquipmentData = (function () {
         Arena0: [
             [1],
             [1, 1],
-            [2, 1, 1]
+            [2, 1]
         ],
         Arena1: [
-            [2],
-            [2, 1, 1],
-            [3, 2, 1]
+            [1, 1],
+            [2, 1],
+            [2, 1, 1]
         ],
         Arena2: [
-            [3],
-            [3, 2, 1],
-            [4, 3, 2]
+            [2, 1],
+            [2, 2],
+            [2, 2, 1]
         ],
         Arena3: [
-            [4],
-            [4, 3, 2],
-            [5, 4, 3]
+            [2, 2],
+            [3, 2],
+            [3, 2, 1]
         ]
     };
     EquipmentData.HeadgearImages = {
@@ -1718,24 +1721,24 @@ var AvatarData = (function () {
     };
     AvatarData.GetPlayerAvatarInfo = function () {
         return {
-            alien: { Owned: false, Xp: 0, Rank: 0 },
-            blue: { Owned: true, Xp: 0, Rank: 0 },
-            boxer: { Owned: false, Xp: 0, Rank: 0 },
-            cat: { Owned: false, Xp: 0, Rank: 0 },
-            clown: { Owned: false, Xp: 0, Rank: 0 },
-            cow: { Owned: false, Xp: 0, Rank: 0 },
-            dinosaur: { Owned: false, Xp: 0, Rank: 0 },
-            dog: { Owned: false, Xp: 0, Rank: 0 },
-            dragon: { Owned: false, Xp: 0, Rank: 0 },
-            fairy: { Owned: false, Xp: 0, Rank: 0 },
-            frank: { Owned: false, Xp: 0, Rank: 0 },
-            pirate: { Owned: false, Xp: 0, Rank: 0 },
-            red: { Owned: true, Xp: 0, Rank: 0 },
-            robber: { Owned: false, Xp: 0, Rank: 0 },
-            robot: { Owned: false, Xp: 0, Rank: 0 },
-            superhero: { Owned: false, Xp: 0, Rank: 0 },
-            teddy: { Owned: false, Xp: 0, Rank: 0 },
-            wizard: { Owned: false, Xp: 0, Rank: 0 }
+            alien: { IsPurchased: false, Xp: 0, Rank: 0 },
+            blue: { IsPurchased: true, Xp: 0, Rank: 0 },
+            boxer: { IsPurchased: false, Xp: 0, Rank: 0 },
+            cat: { IsPurchased: false, Xp: 0, Rank: 0 },
+            clown: { IsPurchased: false, Xp: 0, Rank: 0 },
+            cow: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dinosaur: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dog: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dragon: { IsPurchased: false, Xp: 0, Rank: 0 },
+            fairy: { IsPurchased: false, Xp: 0, Rank: 0 },
+            frank: { IsPurchased: false, Xp: 0, Rank: 0 },
+            pirate: { IsPurchased: false, Xp: 0, Rank: 0 },
+            red: { IsPurchased: true, Xp: 0, Rank: 0 },
+            robber: { IsPurchased: false, Xp: 0, Rank: 0 },
+            robot: { IsPurchased: false, Xp: 0, Rank: 0 },
+            superhero: { IsPurchased: false, Xp: 0, Rank: 0 },
+            teddy: { IsPurchased: false, Xp: 0, Rank: 0 },
+            wizard: { IsPurchased: false, Xp: 0, Rank: 0 }
         };
     };
     AvatarData.GetRandomAvatar = function (rarity) {
@@ -1749,6 +1752,25 @@ var AvatarData = (function () {
                 pool.push({ Id: id, Avatar: avatar });
         }
         return pool[Math.floor(Math.random() * pool.length)];
+    };
+    AvatarData.GainXp = function (id, xp) {
+        var result = { Avatars: null };
+        log.debug("gain xp: " + id + ", " + xp);
+        var internalDataResult = server.GetUserInternalData({
+            PlayFabId: currentPlayerId,
+            Keys: [Constants.Avatars]
+        });
+        result.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+        result.Avatars[id].Xp += xp;
+        log.debug("avatar xp: " + result.Avatars[id].Xp);
+        var returnData = {};
+        returnData[Constants.Avatars] = JSON.stringify(result.Avatars);
+        internalDataResult = server.UpdateUserInternalData({
+            PlayFabId: currentPlayerId,
+            Data: returnData
+        });
+        log.debug("complete");
+        return result;
     };
     AvatarData.IncreaseAvatarRank = function (id) {
         var result = { Coins: -1, Avatars: null };
@@ -1858,6 +1880,9 @@ handlers.getAvatarData = function (args, context) {
 };
 handlers.getAvatarRankMetaData = function (args, context) {
     return AvatarData.GetAvatarRankMetaData();
+};
+handlers.gainAvatarXp = function (args, context) {
+    return AvatarData.GainXp(args.Id, args.Xp);
 };
 handlers.hash = function (args, context) {
     var str = args.str;

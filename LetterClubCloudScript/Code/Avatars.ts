@@ -977,24 +977,24 @@ class AvatarData
 
     public static GetPlayerAvatarInfo(): AvatarList  {
         return {
-            alien: { Owned: false, Xp: 0, Rank: 0 },
-            blue: { Owned: true, Xp: 0, Rank: 0 },
-            boxer: { Owned: false, Xp: 0, Rank: 0 },
-            cat: { Owned: false, Xp: 0, Rank: 0 },
-            clown: { Owned: false, Xp: 0, Rank: 0 },
-            cow: { Owned: false, Xp: 0, Rank: 0 },
-            dinosaur: { Owned: false, Xp: 0, Rank: 0 },
-            dog: { Owned: false, Xp: 0, Rank: 0 },
-            dragon: { Owned: false, Xp: 0, Rank: 0 },
-            fairy: { Owned: false, Xp: 0, Rank: 0 },
-            frank: { Owned: false, Xp: 0, Rank: 0 },
-            pirate: { Owned: false, Xp: 0, Rank: 0 },
-            red: { Owned: true, Xp: 0, Rank: 0 },
-            robber: { Owned: false, Xp: 0, Rank: 0 },
-            robot: { Owned: false, Xp: 0, Rank: 0 },
-            superhero: { Owned: false, Xp: 0, Rank: 0 },
-            teddy: { Owned: false, Xp: 0, Rank: 0 },
-            wizard: { Owned: false, Xp: 0, Rank: 0 }
+            alien: { IsPurchased: false, Xp: 0, Rank: 0 },
+            blue: { IsPurchased: true, Xp: 0, Rank: 0 },
+            boxer: { IsPurchased: false, Xp: 0, Rank: 0 },
+            cat: { IsPurchased: false, Xp: 0, Rank: 0 },
+            clown: { IsPurchased: false, Xp: 0, Rank: 0 },
+            cow: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dinosaur: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dog: { IsPurchased: false, Xp: 0, Rank: 0 },
+            dragon: { IsPurchased: false, Xp: 0, Rank: 0 },
+            fairy: { IsPurchased: false, Xp: 0, Rank: 0 },
+            frank: { IsPurchased: false, Xp: 0, Rank: 0 },
+            pirate: { IsPurchased: false, Xp: 0, Rank: 0 },
+            red: { IsPurchased: true, Xp: 0, Rank: 0 },
+            robber: { IsPurchased: false, Xp: 0, Rank: 0 },
+            robot: { IsPurchased: false, Xp: 0, Rank: 0 },
+            superhero: { IsPurchased: false, Xp: 0, Rank: 0 },
+            teddy: { IsPurchased: false, Xp: 0, Rank: 0 },
+            wizard: { IsPurchased: false, Xp: 0, Rank: 0 }
         };
     }
 
@@ -1012,6 +1012,31 @@ class AvatarData
         }
 
         return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    public static GainXp(id: string, xp: number) {
+        var result = { Avatars: null };
+
+        log.debug("gain xp: " + id + ", " + xp);
+        var internalDataResult = server.GetUserInternalData({
+            PlayFabId: currentPlayerId,
+            Keys: [Constants.Avatars]
+        });
+
+        result.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
+        result.Avatars[id].Xp += xp;
+
+        log.debug("avatar xp: " + result.Avatars[id].Xp);
+
+        var returnData: { [keys: string]: string } = {};
+        returnData[Constants.Avatars] = JSON.stringify(result.Avatars);
+        internalDataResult = server.UpdateUserInternalData({
+            PlayFabId: currentPlayerId,
+            Data: returnData
+        });
+        log.debug("complete");
+
+        return result;
     }
 
     public static IncreaseAvatarRank(id: string)
@@ -1071,7 +1096,7 @@ class AvatarData
 type AvatarList = { [keys: string]: Avatar }
 
 interface Avatar {
-    Owned: boolean,
+    IsPurchased: boolean,
     Xp: number,
     Rank: number
 }

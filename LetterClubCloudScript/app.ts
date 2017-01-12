@@ -81,6 +81,10 @@ handlers.getAvatarRankMetaData = function (args, context): AvatarRankMetaData {
     return AvatarData.GetAvatarRankMetaData();
 }
 
+handlers.gainAvatarXp = function (args, context) {
+    return AvatarData.GainXp(args.Id, args.Xp);
+}
+
 handlers.hash = function (args, context) {
     var str = args.str;
     var hash = 0;
