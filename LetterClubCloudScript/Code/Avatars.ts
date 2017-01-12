@@ -369,8 +369,8 @@ class AvatarData
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 1, r: 1 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },

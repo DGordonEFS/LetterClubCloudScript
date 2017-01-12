@@ -20,8 +20,8 @@ var ChestData = (function () {
             RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: [],
-            RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
             SpecificAvatars: []
         };
     };
@@ -45,7 +45,7 @@ var ChestData = (function () {
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatarRarityWeights: [0, 3, 1, 0],
             SpecificAvatars: []
         };
     };
@@ -69,7 +69,7 @@ var ChestData = (function () {
             RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatarRarityWeights: [0, 0, 1, 0],
             SpecificAvatars: []
         };
     };
@@ -148,8 +148,8 @@ var ChestData = (function () {
             UniqueLetters: 4,
             LetterTiers: [0, 5, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: [],
             RandomAvatars: 0,
             RandomAvatarRarityWeights: [0, 0, 0, 0],
@@ -172,11 +172,11 @@ var ChestData = (function () {
             UniqueLetters: 7,
             LetterTiers: [0, 1, 2, 4],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: 1,
+            RandomAvatarRarityWeights: [0, 1, 0, 0],
             SpecificAvatars: []
         };
     };
@@ -1115,8 +1115,8 @@ var AvatarData = (function () {
                 Rarity: 0,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, b: 2, c: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        LetterData: { f: 1, r: 1 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     1: {
                         LetterData: { a: 1, b: 2, c: 3 },

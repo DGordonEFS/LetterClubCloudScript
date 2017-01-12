@@ -45,8 +45,8 @@ class ChestData
             RandomHeadGears: 1,
             RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: [],
-            RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatars: 0,
+            RandomAvatarRarityWeights: [0, 0, 0, 0],
             SpecificAvatars: []
         };
     }
@@ -71,7 +71,7 @@ class ChestData
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatarRarityWeights: [0, 3, 1, 0],
             SpecificAvatars: []
         };
     }
@@ -96,7 +96,7 @@ class ChestData
             RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,
-            RandomAvatarRarityWeights: [1, 0, 0, 0],
+            RandomAvatarRarityWeights: [0, 0, 1, 0],
             SpecificAvatars: []
         };
     }
@@ -185,8 +185,8 @@ class ChestData
             UniqueLetters: 4,
             LetterTiers: [0, 5, 0, 0],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 1, 0, 0],
             SpecificItems: [],
             RandomAvatars: 0,
             RandomAvatarRarityWeights: [0, 0, 0, 0],
@@ -210,11 +210,11 @@ class ChestData
             UniqueLetters: 7,
             LetterTiers: [0, 1, 2, 4],
             SpecificLetters: [],
-            RandomHeadGears: 0,
-            RandomHeadGearsRarityWeights: [0, 0, 0, 0],
+            RandomHeadGears: 1,
+            RandomHeadGearsRarityWeights: [0, 0, 1, 0],
             SpecificItems: [],
-            RandomAvatars: 0,
-            RandomAvatarRarityWeights: [0, 0, 0, 0],
+            RandomAvatars: 1,
+            RandomAvatarRarityWeights: [0, 1, 0, 0],
             SpecificAvatars: []
         };
     }
