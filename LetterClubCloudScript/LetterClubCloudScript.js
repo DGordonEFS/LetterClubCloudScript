@@ -392,17 +392,17 @@ var ChestData = (function () {
             log.debug("rare weight: " + rareWeight);
             var epicWeight = data.RandomAvatarRarityWeights[2];
             log.debug("epic weight: " + epicWeight);
-            if (rarityIndex <= commonWeight) {
+            if (rarityIndex < commonWeight) {
                 log.debug("setting common");
                 rarity = Constants.Common;
                 log.debug("set common");
             }
-            else if (rarityIndex <= commonWeight + rareWeight) {
+            else if (rarityIndex < commonWeight + rareWeight) {
                 log.debug("setting rare");
                 rarity = Constants.Rare;
                 log.debug("set rare");
             }
-            else if (rarityIndex <= commonWeight + rareWeight + epicWeight) {
+            else if (rarityIndex < commonWeight + rareWeight + epicWeight) {
                 log.debug("setting epic");
                 rarity = Constants.Epic;
                 log.debug("set epic");
@@ -954,7 +954,7 @@ var AvatarData = (function () {
                 }
             },
             dinosaur: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { t: 0 },
@@ -1070,7 +1070,7 @@ var AvatarData = (function () {
                 }
             },
             frank: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: {},
@@ -1099,7 +1099,7 @@ var AvatarData = (function () {
                 }
             },
             pirate: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { r: 1 },

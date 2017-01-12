@@ -180,7 +180,7 @@ class AvatarData
                 }
             },
             dinosaur: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { t: 0 },
@@ -296,7 +296,7 @@ class AvatarData
                 }
             },
             frank: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: {},
@@ -325,7 +325,7 @@ class AvatarData
                 }
             },
             pirate: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { r: 1 },
