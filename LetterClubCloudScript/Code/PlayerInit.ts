@@ -68,9 +68,9 @@ class PlayerInit {
                 var baseAvatar = baseAvatars[key];
                 if (playerAvatar.IsPurchased) {
                     baseAvatar.IsPurchased = true;
-                    baseAvatar.Xp = playerAvatar.Xp;
-                    baseAvatar.Rank = playerAvatar.Rank;
                 }
+                baseAvatar.Xp = playerAvatar.Xp;
+                baseAvatar.Rank = playerAvatar.Rank;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }

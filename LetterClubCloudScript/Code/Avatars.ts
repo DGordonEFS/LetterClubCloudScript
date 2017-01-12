@@ -5,30 +5,30 @@ class AvatarData
     {
         return {
             alien: {
-                Rarity: 0,
+                Rarity: 2,
                 RankData: {
                     0: {
-                        LetterData: { a: 1, e: 0, o: 0 },
+                        LetterData: { a: 1, e: 0, o: 0, i: 0 },
                         BuffData: { hp: { value: "-5" } }
                     },
                     1: {
-                        LetterData: { a: 1, e: 1, o: 0 },
+                        LetterData: { a: 1, e: 1, o: 0, i: 0 },
                         BuffData: { hp: { value: "-10" } }
                     },
                     2: {
-                        LetterData: { a: 1, e: 1, o: 0 },
+                        LetterData: { a: 1, e: 1, o: 1, i: 0 },
                         BuffData: { hp: { value: "-15" } }
                     },
                     3: {
-                        LetterData: { a: 1, e: 1, o: 1 },
+                        LetterData: { a: 1, e: 1, o: 1, i: 1 },
                         BuffData: { hp: { value: "-20" } }
                     },
                     4: {
-                        LetterData: { a: 2, e: 2, o: 1 },
+                        LetterData: { a: 2, e: 2, o: 1, i: 1 },
                         BuffData: { hp: { value: "-25" } }
                     },
                     5: {
-                        LetterData: { a: 2, e: 2, o: 2 },
+                        LetterData: { a: 2, e: 2, o: 2, i: 2 },
                         BuffData: { hp: { value: "-30" } }
                     }
                 }
@@ -238,31 +238,31 @@ class AvatarData
                 }
             },
             dragon: {
-                Rarity: 0,
+                Rarity: 2,
                 RankData: {
                     0: {
                         LetterData: { f: 0, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "0" } }
                     },
                     1: {
                         LetterData: { f: 1, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     2: {
-                        LetterData: { f: 1, i: 1, r: 1, e: 1 },
-                        BuffData: { hp: { value: "30" } }
+                        LetterData: { f: 1, i: 1, r: 1, e: 0 },
+                        BuffData: { hp: { value: "10" } }
                     },
                     3: {
-                        LetterData: { f: 2, i: 1, r: 2, e: 1 },
-                        BuffData: { hp: { value: "40" } }
+                        LetterData: { f: 1, i: 1, r: 1, e: 1 },
+                        BuffData: { hp: { value: "15" } }
                     },
                     4: {
-                        LetterData: { f: 2, i: 2, r: 2, e: 2 },
-                        BuffData: { hp: { value: "50" } }
+                        LetterData: { f: 2, i: 1, r: 2, e: 1 },
+                        BuffData: { hp: { value: "20" } }
                     },
                     5: {
-                        LetterData: { f: 3, i: 3, r: 3, e: 3 },
-                        BuffData: { hp: { value: "60" } }
+                        LetterData: { f: 2, i: 2, r: 2, e: 2 },
+                        BuffData: { hp: { value: "25" } }
                     }
                 }
             },
@@ -534,153 +534,153 @@ class AvatarData
         return {
             0: {
                 0: {
-                    Xp: 1000,
+                    Xp: 10,
                     Cost: 50
                 },
                 1: {
-                    Xp: 2000,
+                    Xp: 20,
                     Cost: 200
                 },
                 2: {
-                    Xp: 5000,
+                    Xp: 50,
                     Cost: 500
                 },
                 3: {
-                    Xp: 10000,
+                    Xp: 100,
                     Cost: 1000
                 },
                 4: {
-                    Xp: 20000,
+                    Xp: 200,
                     Cost: 2000
                 },
                 5: {
-                    Xp: 40000,
+                    Xp: 400,
                     Cost: 4000
                 },
                 6: {
-                    Xp: 100000,
+                    Xp: 1000,
                     Cost: 10000
                 },
                 7: {
-                    Xp: 200000,
+                    Xp: 2000,
                     Cost: 20000
                 },
                 8: {
-                    Xp: 400000,
+                    Xp: 4000,
                     Cost: 40000
                 }
             },
             1: {
                 0: {
-                    Xp: 1000,
+                    Xp: 10,
                     Cost: 50
                 },
                 1: {
-                    Xp: 2000,
+                    Xp: 20,
                     Cost: 200
                 },
                 2: {
-                    Xp: 5000,
+                    Xp: 50,
                     Cost: 500
                 },
                 3: {
-                    Xp: 10000,
+                    Xp: 100,
                     Cost: 1000
                 },
                 4: {
-                    Xp: 20000,
+                    Xp: 200,
                     Cost: 2000
                 },
                 5: {
-                    Xp: 40000,
+                    Xp: 400,
                     Cost: 4000
                 },
                 6: {
-                    Xp: 100000,
+                    Xp: 1000,
                     Cost: 10000
                 },
                 7: {
-                    Xp: 200000,
+                    Xp: 2000,
                     Cost: 20000
                 },
                 8: {
-                    Xp: 400000,
+                    Xp: 4000,
                     Cost: 40000
                 }
             },
             2: {
                 0: {
-                    Xp: 1000,
+                    Xp: 10,
                     Cost: 50
                 },
                 1: {
-                    Xp: 2000,
+                    Xp: 20,
                     Cost: 200
                 },
                 2: {
-                    Xp: 5000,
+                    Xp: 50,
                     Cost: 500
                 },
                 3: {
-                    Xp: 10000,
+                    Xp: 100,
                     Cost: 1000
                 },
                 4: {
-                    Xp: 20000,
+                    Xp: 200,
                     Cost: 2000
                 },
                 5: {
-                    Xp: 40000,
+                    Xp: 400,
                     Cost: 4000
                 },
                 6: {
-                    Xp: 100000,
+                    Xp: 1000,
                     Cost: 10000
                 },
                 7: {
-                    Xp: 200000,
+                    Xp: 2000,
                     Cost: 20000
                 },
                 8: {
-                    Xp: 400000,
+                    Xp: 4000,
                     Cost: 40000
                 }
             },
             3: {
                 0: {
-                    Xp: 1000,
+                    Xp: 10,
                     Cost: 50
                 },
                 1: {
-                    Xp: 2000,
+                    Xp: 20,
                     Cost: 200
                 },
                 2: {
-                    Xp: 5000,
+                    Xp: 50,
                     Cost: 500
                 },
                 3: {
-                    Xp: 10000,
+                    Xp: 100,
                     Cost: 1000
                 },
                 4: {
-                    Xp: 20000,
+                    Xp: 200,
                     Cost: 2000
                 },
                 5: {
-                    Xp: 40000,
+                    Xp: 400,
                     Cost: 4000
                 },
                 6: {
-                    Xp: 100000,
+                    Xp: 1000,
                     Cost: 10000
                 },
                 7: {
-                    Xp: 200000,
+                    Xp: 2000,
                     Cost: 20000
                 },
                 8: {
-                    Xp: 400000,
+                    Xp: 4000,
                     Cost: 40000
                 }
             }
@@ -712,8 +712,11 @@ class AvatarData
 
     public static GetRandomAvatar(rarity: number): AvatarId
     {
-        var avatarsData = AvatarData.GetAvatarData();
-        var avatars = AvatarData.GetPlayerAvatarInfo();
+        log.debug("get random avatar: " + rarity);
+        var avatarsData: AvatarDataList = AvatarData.GetAvatarData();
+        log.debug("avatars data: " + avatarsData);
+        var avatars: AvatarList = AvatarData.GetPlayerAvatarInfo();
+        log.debug("avatars: " + avatarsData);
         var pool: AvatarId[] = [];
 
         for (var id in avatars) {
@@ -723,6 +726,7 @@ class AvatarData
                 pool.push({ Id: id, Avatar: avatar });
         }
 
+        log.debug("pick random: " + pool);
         return pool[Math.floor(Math.random() * pool.length)];
     }
 
@@ -757,10 +761,10 @@ class AvatarData
 
         log.debug("get avatar rank");
 
-        var avatarRanks = AvatarData.GetAvatarRankMetaData();
+        var avatarRanks: AvatarRankMetaData = AvatarData.GetAvatarRankMetaData();
 
         log.debug("get avatar data");
-        var avatarsData = AvatarData.GetAvatarData();
+        var avatarsData: AvatarDataList = AvatarData.GetAvatarData();
 
 
 
@@ -772,12 +776,18 @@ class AvatarData
         var avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
 
 
-        log.debug("get avatar");
+        log.debug("get avatar " + id);
         var avatar:Avatar = avatars[id];
 
-        var rankData: AvatarRank = avatarRanks[avatarsData[id].Rarity][avatar.Rank];
+        var rarity: number = avatarsData[id].Rarity;
+        log.debug("rarity: " + rarity)
+        log.debug("rank: " + avatar.Rank);
 
-        log.debug("rank data");
+        var rankData: AvatarRank = avatarRanks[rarity][avatar.Rank];
+
+        log.debug("rank data " + rankData);
+        log.debug("cost: " + rankData.Cost);
+        log.debug("xp: " + rankData.Xp);
         var currencyResult = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
             VirtualCurrency: Constants.Coins,

@@ -12,7 +12,7 @@ class Constants {
     static readonly Epic: number = 2;
     static readonly Legendary: number = 3;
     static readonly Sunglasses: number = 0;
-    static readonly XpPerAvatar: number = 500;
+    static readonly XpPerAvatar: number = 20;
     static readonly Coins: string = "CO";
     static readonly Gems: string = "Gems";
 }

@@ -71,7 +71,7 @@ class ChestData
             RandomHeadGearsRarityWeights: [0, 3, 1, 0],
             SpecificItems: [],
             RandomAvatars: 1,
-            RandomAvatarRarityWeights: [0, 3, 1, 0],
+            RandomAvatarRarityWeights: [0, 4, 1, 0],
             SpecificAvatars: []
         };
     }
@@ -163,7 +163,7 @@ class ChestData
             RandomHeadGearsRarityWeights: [900, 95, 5, 0],
             SpecificItems: [],
             RandomAvatars: randomAvatar,
-            RandomAvatarRarityWeights: [900, 90, 5, 0],
+            RandomAvatarRarityWeights: [900, 100, 0, 0],
             SpecificAvatars: []
         };
     }
@@ -466,33 +466,68 @@ class ChestData
         
         
         chestResult.Avatars = JSON.parse(internalDataResult.Data[Constants.Avatars].Value);
-        
+
+        log.debug("random avatars");
         for (var i = 0; i < data.RandomAvatars; i++) {
             log.debug("   - create random avatar");
             var rarityIndex = Math.floor(Math.random() * randomItemRarityWeightTotal);
             var rarity;
-            
-            if (rarityIndex < data.RandomAvatarRarityWeights[0])
+
+
+            log.debug("rarityIndex: " + rarityIndex);
+
+            log.debug("data: " + data);
+            log.debug("RandomAvatarRarityWeights: " + data.RandomAvatarRarityWeights);
+            log.debug("RandomAvatarRarityWeights len: " + data.RandomAvatarRarityWeights.length);
+            log.debug("RandomAvatarRarityWeights 0: " + data.RandomAvatarRarityWeights[0]);
+            log.debug("RandomAvatarRarityWeights 1: " + data.RandomAvatarRarityWeights[1]);
+            log.debug("RandomAvatarRarityWeights 2: " + data.RandomAvatarRarityWeights[2]);
+
+            var commonWeight: number = data.RandomAvatarRarityWeights[0];
+            log.debug("common weight: " + commonWeight);
+
+            var rareWeight: number = data.RandomAvatarRarityWeights[1];
+            log.debug("rare weight: " + rareWeight);
+
+            var epicWeight: number = data.RandomAvatarRarityWeights[2];
+            log.debug("epic weight: " + epicWeight);
+
+            if (rarityIndex <= commonWeight) {
+                log.debug("setting common");
                 rarity = Constants.Common;
-            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1])
+                log.debug("set common");
+            }
+            else if (rarityIndex <= commonWeight + rareWeight) {
+                log.debug("setting rare");
                 rarity = Constants.Rare;
-            else if (rarityIndex < data.RandomAvatarRarityWeights[0] + data.RandomAvatarRarityWeights[1] + data.RandomAvatarRarityWeights[2])
+                log.debug("set rare");
+            }
+            else if (rarityIndex <= commonWeight + rareWeight + epicWeight) {
+                log.debug("setting epic");
                 rarity = Constants.Epic;
-            else
-                rarity = Constants.Legendary;
+                log.debug("set epic");
+            }
 
-
+            log.debug("rarity selected");
             log.debug("rarity: " + rarity);
 
             var avatar = AvatarData.GetRandomAvatar(rarity);
-            
+
+            log.debug("avatar: " + avatar.Id);
             chestResult.AvatarsAdded.push(avatar.Id);
-            if (!chestResult.Avatars[avatar.Id].IsPurchased)
+
+
+            if (!chestResult.Avatars[avatar.Id].IsPurchased) {
+                log.debug("new avatar: " + avatar.Id);
                 chestResult.Avatars[avatar.Id].IsPurchased = true;
-            else
+            }
+            else {
+                log.debug("xp avatar: " + avatar.Id);
                 chestResult.Avatars[avatar.Id].Xp += Constants.XpPerAvatar;
+            }
         }
 
+        log.debug("specific avatars");
         for (var i = 0; i < data.SpecificAvatars.length; i++) {
             var avatarId = data.SpecificAvatars[i];
 
