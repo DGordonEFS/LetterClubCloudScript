@@ -9,7 +9,7 @@ handlers.pickNewDailyLetters = function(){
   var lettersForThisMonthData = server.GetTitleInternalData({Keys: [lettersForThisMonthKey]})["Data"][lettersForThisMonthKey];
   var dailySaleCurrentData = parseInt(server.GetTitleData({Keys:["DailySaleCurrentDay"]})["Data"]["DailySaleCurrentDay"]);
   var lettersForThisMonth = JSON.parse(lettersForThisMonthData);
-  if(lettersForThisMonth.length > 0) {
+  if(lettersForThisMonth.length > 0) { 
     var lettersForToday = lettersForThisMonth.pop();
     server.SetTitleData({Key:"DailySaleLetter0", Value:lettersForToday[0]});
     server.SetTitleData({Key:"DailySaleLetter1", Value:lettersForToday[1]});
@@ -24,7 +24,7 @@ handlers.resetLeaderboard = function(data){
     var url = "https://53BC.playfabapi.com/admin/IncrementPlayerStatisticVersion";
     var method = "post";
     var contentBody = JSON.stringify({StatisticName: "Game Score"});
-    var contentType = "application/json";
+    var contentType = "application/json";   
     var headers = {"X-SecretKey" : "I8NPY91Y3BJ8XRG975AHSP81XJ4J336OHDRSZSJEP4G4NJPA1G"};
     var responseString =  (<any>http.request)(url,method,contentBody,contentType,headers); 
     log.debug(responseString);  
