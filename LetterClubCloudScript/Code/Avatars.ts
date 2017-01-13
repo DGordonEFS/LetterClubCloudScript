@@ -63,7 +63,6 @@ class AvatarData
                 }
             },
             boxer: {
-
                 Rarity: 0,
                 RankData: {
                     0: {
@@ -267,7 +266,7 @@ class AvatarData
                 }
             },
             fairy: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { l: 1, g: 0, n: 0 },
@@ -296,7 +295,7 @@ class AvatarData
                 }
             },
             frank: {
-                Rarity: 1,
+                Rarity: 0,
                 RankData: {
                     0: {
                         LetterData: {},
@@ -412,7 +411,7 @@ class AvatarData
                 }
             },
             robot: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { q: 1 },
@@ -441,7 +440,7 @@ class AvatarData
                 }
             },
             superhero: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { s: 0, u: 0, p: 1 },
@@ -499,7 +498,7 @@ class AvatarData
                 }
             },
             wizard: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { w: 1, i: 0, z: 0 },

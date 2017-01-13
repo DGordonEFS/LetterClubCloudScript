@@ -1041,7 +1041,7 @@ var AvatarData = (function () {
                 }
             },
             fairy: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { l: 1, g: 0, n: 0 },
@@ -1070,7 +1070,7 @@ var AvatarData = (function () {
                 }
             },
             frank: {
-                Rarity: 1,
+                Rarity: 0,
                 RankData: {
                     0: {
                         LetterData: {},
@@ -1186,7 +1186,7 @@ var AvatarData = (function () {
                 }
             },
             robot: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { q: 1 },
@@ -1215,7 +1215,7 @@ var AvatarData = (function () {
                 }
             },
             superhero: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { s: 0, u: 0, p: 1 },
@@ -1273,7 +1273,7 @@ var AvatarData = (function () {
                 }
             },
             wizard: {
-                Rarity: 0,
+                Rarity: 1,
                 RankData: {
                     0: {
                         LetterData: { w: 1, i: 0, z: 0 },
