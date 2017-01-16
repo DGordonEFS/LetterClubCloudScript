@@ -545,8 +545,10 @@ var PlayerInit = (function () {
                 if (playerAvatar.IsPurchased) {
                     baseAvatar.IsPurchased = true;
                 }
-                baseAvatar.Xp = playerAvatar.Xp;
-                baseAvatar.Rank = playerAvatar.Rank;
+                if (playerAvatar.Xp != null)
+                    baseAvatar.Xp = playerAvatar.Xp;
+                if (playerAvatar.Rank != null)
+                    baseAvatar.Rank = playerAvatar.Rank;
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
@@ -1016,27 +1018,27 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { f: 0, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { f: 1, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { f: 1, i: 1, r: 1, e: 0 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { f: 1, i: 1, r: 1, e: 1 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { f: 2, i: 1, r: 2, e: 1 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { f: 2, i: 2, r: 2, e: 2 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },

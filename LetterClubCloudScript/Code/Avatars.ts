@@ -241,27 +241,27 @@ class AvatarData
                 RankData: {
                     0: {
                         LetterData: { f: 0, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { f: 1, i: 0, r: 1, e: 0 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { f: 1, i: 1, r: 1, e: 0 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { f: 1, i: 1, r: 1, e: 1 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { f: 2, i: 1, r: 2, e: 1 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { f: 2, i: 2, r: 2, e: 2 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },

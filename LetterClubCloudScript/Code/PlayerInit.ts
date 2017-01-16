@@ -69,8 +69,12 @@ class PlayerInit {
                 if (playerAvatar.IsPurchased) {
                     baseAvatar.IsPurchased = true;
                 }
-                baseAvatar.Xp = playerAvatar.Xp;
-                baseAvatar.Rank = playerAvatar.Rank;
+                if (playerAvatar.Xp != null)
+                    baseAvatar.Xp = playerAvatar.Xp;
+
+                if (playerAvatar.Rank != null)
+                    baseAvatar.Rank = playerAvatar.Rank;
+
                 log.debug(" - avatar: " + key + ", " + playerAvatar.IsPurchased);
             }
         }
