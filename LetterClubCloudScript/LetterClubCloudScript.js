@@ -103,12 +103,16 @@ var ChestData = (function () {
             Keys: ["profile"]
         });
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
+        var glassesRandom = Math.random();
         var randomHeadGear = 0;
-        if (Math.random() < 0.33)
+        if (glassesRandom < 0.33)
             randomHeadGear = 1;
+        var avatarRandom = Math.random();
         var randomAvatar = 0;
-        if (Math.random() < 0.1)
+        if (avatarRandom < 0.1)
             randomAvatar = 1;
+        log.debug("glassesRandom: " + glassesRandom + ", " + randomHeadGear + ", " + (glassesRandom < 0.33));
+        log.debug("avatarRandom: " + avatarRandom + ", " + randomAvatar + ", " + (avatarRandom < 0.1));
         return {
             Type: "reward_chest",
             ChestId: "purple",
@@ -815,27 +819,27 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { y: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { y: 1 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { y: 1 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { y: 2 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { y: 2 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { y: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },
@@ -1134,27 +1138,27 @@ var AvatarData = (function () {
                 RankData: {
                     0: {
                         LetterData: { x: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { x: 1 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { x: 1 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { x: 2 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { x: 3 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { x: 4 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },

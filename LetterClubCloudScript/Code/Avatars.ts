@@ -38,27 +38,27 @@ class AvatarData
                 RankData: {
                     0: {
                         LetterData: { y: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { y: 1 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { y: 1 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { y: 2 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { y: 2 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { y: 3 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },
@@ -357,27 +357,27 @@ class AvatarData
                 RankData: {
                     0: {
                         LetterData: { x: 0 },
-                        BuffData: { hp: { value: "0" } }
+                        BuffData: { hp: { value: "5" } }
                     },
                     1: {
                         LetterData: { x: 1 },
-                        BuffData: { hp: { value: "5" } }
+                        BuffData: { hp: { value: "10" } }
                     },
                     2: {
                         LetterData: { x: 1 },
-                        BuffData: { hp: { value: "10" } }
+                        BuffData: { hp: { value: "15" } }
                     },
                     3: {
                         LetterData: { x: 2 },
-                        BuffData: { hp: { value: "15" } }
+                        BuffData: { hp: { value: "20" } }
                     },
                     4: {
                         LetterData: { x: 3 },
-                        BuffData: { hp: { value: "20" } }
+                        BuffData: { hp: { value: "25" } }
                     },
                     5: {
                         LetterData: { x: 4 },
-                        BuffData: { hp: { value: "25" } }
+                        BuffData: { hp: { value: "30" } }
                     }
                 }
             },

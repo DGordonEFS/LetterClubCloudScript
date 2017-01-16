@@ -136,13 +136,18 @@ class ChestData
         var userProfile = JSON.parse(userDataResult.Data["profile"].Value);
 
 
+        var glassesRandom = Math.random();
         var randomHeadGear = 0;
-        if (Math.random() < 0.33) 
+        if (glassesRandom < 0.33) 
             randomHeadGear = 1;
 
+        var avatarRandom = Math.random();
         var randomAvatar = 0;
-        if (Math.random() < 0.1)
+        if (avatarRandom < 0.1)
             randomAvatar = 1;
+
+        log.debug("glassesRandom: " + glassesRandom + ", " + randomHeadGear + ", " + (glassesRandom < 0.33));
+        log.debug("avatarRandom: " + avatarRandom + ", " + randomAvatar + ", " + (avatarRandom < 0.1));
         
         return {
             Type: "reward_chest",
